@@ -3,6 +3,6 @@ project(OOP)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(POO main.cpp)
+add_executable(oop main.cpp)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
