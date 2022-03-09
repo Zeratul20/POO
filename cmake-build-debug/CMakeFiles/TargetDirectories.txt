@@ -1,5 +1,5 @@
 C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug/CMakeFiles/install/strip.dir
-C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug/CMakeFiles/OOP.dir
+C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug/CMakeFiles/oop.dir
 C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug/CMakeFiles/install/local.dir
 C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug/CMakeFiles/install.dir
 C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug/CMakeFiles/edit_cache.dir

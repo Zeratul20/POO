@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: OOP
+# Project: oop
 # Configurations: Debug
 # =============================================================================
 
@@ -53,37 +53,37 @@ build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
 build install/strip: phony CMakeFiles/install/strip.util
 
 # =============================================================================
-# Object build statements for EXECUTABLE target OOP
+# Object build statements for EXECUTABLE target oop
 
 
 #############################################
-# Order-only phony target for OOP
+# Order-only phony target for oop
 
-build cmake_object_order_depends_target_OOP: phony || CMakeFiles/OOP.dir
+build cmake_object_order_depends_target_oop: phony || CMakeFiles/oop.dir
 
-build CMakeFiles/OOP.dir/main.cpp.obj: CXX_COMPILER__OOP_Debug C$:/Users/utilizator/CLionProjects/tema$ POO/POO/main.cpp || cmake_object_order_depends_target_OOP
-  DEP_FILE = CMakeFiles\OOP.dir\main.cpp.obj.d
+build CMakeFiles/oop.dir/main.cpp.obj: CXX_COMPILER__oop_Debug C$:/Users/utilizator/CLionProjects/tema$ POO/POO/main.cpp || cmake_object_order_depends_target_oop
+  DEP_FILE = CMakeFiles\oop.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++20
-  OBJECT_DIR = CMakeFiles\OOP.dir
-  OBJECT_FILE_DIR = CMakeFiles\OOP.dir
+  OBJECT_DIR = CMakeFiles\oop.dir
+  OBJECT_FILE_DIR = CMakeFiles\oop.dir
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target OOP
+# Link build statements for EXECUTABLE target oop
 
 
 #############################################
-# Link the executable OOP.exe
+# Link the executable oop.exe
 
-build OOP.exe: CXX_EXECUTABLE_LINKER__OOP_Debug CMakeFiles/OOP.dir/main.cpp.obj
+build oop.exe: CXX_EXECUTABLE_LINKER__oop_Debug CMakeFiles/oop.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\OOP.dir
+  OBJECT_DIR = CMakeFiles\oop.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = OOP.exe
-  TARGET_IMPLIB = libOOP.dll.a
-  TARGET_PDB = OOP.exe.dbg
+  TARGET_FILE = oop.exe
+  TARGET_IMPLIB = liboop.dll.a
+  TARGET_PDB = oop.exe.dbg
 
 
 #############################################
@@ -141,7 +141,7 @@ build list_install_components: phony
 # =============================================================================
 # Target aliases.
 
-build OOP: phony OOP.exe
+build oop: phony oop.exe
 
 # =============================================================================
 # Folder targets.
@@ -151,7 +151,7 @@ build OOP: phony OOP.exe
 #############################################
 # Folder: C:/Users/utilizator/CLionProjects/tema POO/POO/cmake-build-debug
 
-build all: phony OOP.exe
+build all: phony oop.exe
 
 # =============================================================================
 # Built-in targets
