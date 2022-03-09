@@ -19,14 +19,14 @@ public:
         std::cout<<"CC Student\n";
     }
     ~Student() = default;
-    std::string get_nume() const {
+    [[nodiscard]] std::string get_nume() const {
         return nume;
     }
-    int get_grupa() const {
+    [[nodiscard]] int get_grupa() const {
         return grupa;
     }
 
-    double get_medie() const {
+    [[nodiscard]] double get_medie() const {
         return medie;
     }
     friend std::ostream &operator<<(std::ostream &os, const Student &st);
@@ -46,10 +46,10 @@ public:
         std::cout<<"CC profesor\n";
     }
     ~Profesor() = default;
-    std::string get_nume() const {
+    [[nodiscard]] std::string get_nume() const {
         return nume;
     }
-    std::vector<int> get_grupe() const {
+    [[nodiscard]] std::vector<int> get_grupe() const {
         return grupe;
     }
     friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
@@ -73,7 +73,6 @@ public:
     ~Secretariat() = default;
     friend std::ostream &operator<<(std::ostream &os, const Secretariat &sec);
 };
-int clasa;
 class Facultate {
     std::string nume;
     std::vector<Student>St;
