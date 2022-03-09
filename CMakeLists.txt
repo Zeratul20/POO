@@ -1,7 +1,8 @@
+cmake_minimum_required(VERSION 3.19)
+project(OOP)
 
-cmake_minimum_required(VERSION 3.21)
-project(tema_POO)
+set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_CXX_STANDARD 14)
+add_executable(OOP main.cpp Haina.cpp Haina.h Pantof.cpp Pantof.h Sifonier.cpp Sifonier.h)
 
-add_executable(tema_POO main.cpp)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
