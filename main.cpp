@@ -73,7 +73,7 @@ public:
     ~Secretariat() = default;
     friend std::ostream &operator<<(std::ostream &os, const Secretariat &sec);
 };
-
+int clasa;
 class Facultate {
     std::string nume;
     std::vector<Student>St;
