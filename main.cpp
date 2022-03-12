@@ -61,6 +61,11 @@ public:
     [[nodiscard]] std::vector<int> get_grupe() const {
         return grupe;
     }
+
+    static void sortare_grupe(Profesor &pr) {
+        std::sort(pr.grupe.begin(), pr.grupe.end());
+    }
+
     static void leave_group(Profesor &pr, int grupa) {
         for(int i = 0; i < pr.grupe.size(); i++) {
             if(pr.grupe[i] == grupa) {
@@ -70,6 +75,11 @@ public:
             }
         }
         pr.grupe.pop_back();
+        std::sort(pr.grupe.begin(), pr.grupe.end());
+    }
+    static void add_group(Profesor &pr, int grupa) {
+        pr.grupe.push_back(grupa);
+        std::sort(pr.grupe.begin(), pr.grupe.end());
     }
     friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
 };
@@ -175,7 +185,7 @@ int main() {
     Student st1{"Ionescu", 131, 7.8};
     Student st2{"Georgescu", 151, 5.8};
     Secretariat sc{"Contabilitate", 10, "Alina"};
-    Profesor pr{"Paun", {131, 152}};
+    Profesor pr{"Paun", {131, 152, 143, 141, 151}};
     Facultate fac{"FMI", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
     Facultate fac2{"FMI", {st1, st2}, {pr}, sc};
     std::cout << "Grupa veche: " << st1.get_grupa() << '\n';
@@ -185,12 +195,17 @@ int main() {
     Student::schimbare_grupe_2_studenti(st1, st2);
     std::cout << "Au fost schimbati studentii!\n";
     std::cout << st1 << '\n' << st2;
+    Profesor::sortare_grupe(pr);
     std::cout << "Grupe inainte\n";
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     std::cout << '\n';
-    std::cout << "Paraseste grupa 131\n";
+    std::cout << "Profesor Paraseste grupa 131\n";
     Profesor::leave_group(pr, 131);
+    for(int i = 0; i<pr.get_grupe().size(); i++)
+        std::cout << pr.get_grupe()[i] << ' ';
+    std::cout << "A fost adauugata grupa 133\n";
+    Profesor::add_group(pr, 133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     return 0;
