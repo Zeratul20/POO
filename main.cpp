@@ -10,13 +10,17 @@ class Student {
     int grupa;
     double medie;
 public:
-    Student(std::string nume, int grupa, double medie):nume{std::move(nume)}, grupa{grupa}, medie{medie}
-    {
+    Student(std::string nume, int grupa, double medie):nume{std::move(nume)}, grupa{grupa}, medie{medie} {
+        /*this -> nume = nume;
+        this -> grupa = grupa;
+        this -> medie = medie;*/
         std::cout<<"Student init\n";
     }
-    Student(const Student &other):nume(other.nume), grupa(other.grupa), medie(other.medie)
-    {
-        std::cout<<"CC Student\n";
+    Student(const Student &other):nume(other.nume), grupa(other.grupa), medie(other.medie) {
+        this -> nume = other.nume;
+        this -> grupa = other.grupa;
+        this -> medie = other.medie;
+        //std::cout<<"CC Student\n";
     }
     ~Student() = default;
     [[nodiscard]] std::string get_nume() const {
@@ -39,6 +43,21 @@ public:
     static void schimbare_grupe_2_studenti(Student &s1, Student &s2) {
         std::swap(s1.grupa, s2.grupa);
     }
+    Student &operator=(const Student &other) = default;
+
+    bool operator==(const Student &other) {
+        if(this -> nume == other.nume and this -> grupa == other.grupa and this -> medie == other.medie)
+            return true;
+        return false;
+    }
+
+    static bool check(Student s1, const Student& s2) {
+        if(s1 == s2)
+            return true;
+        return false;
+    }
+
+    friend class Facultate;
 
 };
 
@@ -46,13 +65,15 @@ class Profesor {
     std::string nume;
     std::vector<int>grupe;
 public:
-    Profesor(std::string nume, std::vector<int>grupe):nume{std::move(nume)}, grupe{std::move(grupe)}
-    {
+    Profesor(std::string nume, std::vector<int>grupe):nume{std::move(nume)}, grupe{std::move(grupe)} {
+        /*this -> nume = nume;
+        this -> grupe = grupe;*/
         std::cout<<"Profesor init\n";
     }
-    Profesor(const Profesor &other):nume(other.nume), grupe(other.grupe)
-    {
-        std::cout<<"CC profesor\n";
+    Profesor(const Profesor &other):nume(other.nume), grupe(other.grupe) {
+        this -> nume = other.nume;
+        this -> grupe = other.grupe;
+        //std::cout<<"CC profesor\n";
     }
     ~Profesor() = default;
     [[nodiscard]] std::string get_nume() const {
@@ -89,15 +110,17 @@ class Secretariat {
     int numar_angajati;
     std::string secretar_sef;
 public:
-    Secretariat(std::string departament, int numar_angajati, std::string secretar_sef):
-            departament{std::move(departament)}, numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)}
-    {
+    Secretariat(std::string departament, int numar_angajati, std::string secretar_sef):departament{std::move(departament)}, numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
+        /*this -> departament = departament;
+        this -> numar_angajati = numar_angajati;
+        this -> secretar_sef = secretar_sef;*/
         std::cout<<"Secretariat init\n";
     }
-    Secretariat(const Secretariat &other):
-            departament(other.departament), numar_angajati(other.numar_angajati), secretar_sef(other.secretar_sef)
-    {
-        std::cout<<"CC secretariat\n";
+    Secretariat(const Secretariat &other):departament(other.departament), numar_angajati(other.numar_angajati), secretar_sef(other.secretar_sef) {
+        this -> departament = other.departament;
+        this -> numar_angajati = other.numar_angajati;
+        this -> secretar_sef = other.secretar_sef;
+        //std::cout<<"CC secretariat\n";
     }
     [[nodiscard]] std::string get_departament() const {
         return departament;
@@ -117,16 +140,48 @@ class Facultate {
     std::vector<Profesor>Pr;
     Secretariat Sec;
 public:
-    Facultate(std::string nume, std::vector<Student>St, std::vector<Profesor>Pr, const Secretariat& Sec):nume{std::move(nume)}, St{std::move(St)}, Pr{std::move(Pr)}, Sec(Sec)
-    {
+    Facultate(std::string nume, std::vector<Student>St, std::vector<Profesor>Pr, const Secretariat& Sec):nume{std::move(nume)}, St{std::move(St)}, Pr{std::move(Pr)}, Sec(Sec) {
+        /*this -> nume = nume;
+        this -> St = St;
+        this -> Pr = Pr;
+        this -> Sec = Sec;*/
         std::cout<<"init facultate\n";
     }
     Facultate(const Facultate &other):nume(other.nume), St(other.St), Pr(other.Pr), Sec(other.Sec)
     {
-        std::cout<<"CC facultate\n";
+        this -> nume = other.nume;
+        this -> St = other.St;
+        this -> Pr = other.Pr;
+        this -> Sec = other.Sec;
+        //std::cout<<"CC facultate\n";
     }
     Facultate &operator=(const Facultate &other) = default;
     ~Facultate() = default;
+
+    static void student_leaves(Facultate &f, const Student& s) {
+        for(int i = 0; i < f.St.size(); i++) {
+            if(Student::check(f.St[i], s)) {
+                for(int j = i; j < f.St.size() - 1; j++)
+                    f.St[j] = f.St[j + 1];
+                break;
+            }
+        }
+        f.St.pop_back();
+    }
+
+    static void student_nou(Facultate &f, const Student& s) {
+        f.St.push_back(s);
+    }
+
+    std::vector<Student> get_studenti() {
+        return St;
+    }
+    std::vector<Profesor> get_profesori() {
+        return Pr;
+    }
+    Secretariat get_secretariat() {
+        return Sec;
+    }
 
     friend std::ostream &operator<<(std::ostream &os, const Facultate &f);
 };
@@ -184,10 +239,11 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
 int main() {
     Student st1{"Ionescu", 131, 7.8};
     Student st2{"Georgescu", 151, 5.8};
+    Student st3 = st1;
     Secretariat sc{"Contabilitate", 10, "Alina"};
     Profesor pr{"Paun", {131, 152, 143, 141, 151}};
     Facultate fac{"FMI", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
-    Facultate fac2{"FMI", {st1, st2}, {pr}, sc};
+    Facultate fac2{"FMI", {st1, st2, st3}, {pr}, sc};
     std::cout << "Grupa veche: " << st1.get_grupa() << '\n';
     Student::transfer_grupa(st1, 132);
     std::cout << "Grupa noua: " << st1.get_grupa() << '\n';
@@ -208,5 +264,16 @@ int main() {
     Profesor::add_group(pr, 133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
+    Facultate::student_leaves(fac2, st3);
+    st3 = {"Gigescu", 142, 4};
+    std::cout << st3 <<'\n';
+    Facultate::student_nou(fac2, st3);
+    std::cout << "Toti studentii\n";
+    for(int i = 0; i < fac2.get_studenti().size(); i++)
+        std::cout << fac2.get_studenti()[i] << ' ';
+    Facultate::student_leaves(fac2, st2);
+    std::cout << '\n' << st2 << '\n' << "Abandoneaza studentul\n";
+    for(int i = 0; i < fac2.get_studenti().size(); i++)
+        std::cout << fac2.get_studenti()[i] << ' ';
     return 0;
 }
