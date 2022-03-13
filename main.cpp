@@ -176,13 +176,37 @@ public:
     std::vector<Student> get_studenti() {
         return St;
     }
-    std::vector<Profesor> get_profesori() {
+
+    [[maybe_unused]] std::vector<Profesor> get_profesori() {
         return Pr;
     }
-    Secretariat get_secretariat() {
+
+    [[maybe_unused]] Secretariat get_secretariat() {
         return Sec;
     }
+    static void transfer_grupa(Facultate &f, Student &s) {
+        for(auto & i : f.St)
+            if(i == s) {
+                i.grupa = s.grupa;
+                break;
+            }
+    }
 
+    static void schimbare_grupe_2_studenti(Facultate &f, Student &s1, Student &s2) {
+        int x = 0, y = 0;
+        for(int i = 0; i<f.St.size(); i++)
+            if(f.St[i] == s1) {
+                x = i;
+                break;
+            }
+        for(int i = 0; i<f.St.size(); i++)
+            if(f.St[i] == s2) {
+                y = i;
+                break;
+            }
+        std::swap(f.St[x], f.St[y]);
+    }
+    friend class Student;
     friend std::ostream &operator<<(std::ostream &os, const Facultate &f);
 };
 
@@ -242,13 +266,18 @@ int main() {
     Student st3 = st1;
     Secretariat sc{"Contabilitate", 10, "Alina"};
     Profesor pr{"Paun", {131, 152, 143, 141, 151}};
-    Facultate fac{"FMI", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
+    Facultate fac{"Poli", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
     Facultate fac2{"FMI", {st1, st2, st3}, {pr}, sc};
+    std::cout << "FMI\n";
+    //std::cout << "Studenti\n" << fac2.get_studenti() << "\nProfesori\n" << fac2.get_profesori() << "\nSecretariat\n" << fac2.get_secretariat() << '\n';
+    std::cout << fac2;
     std::cout << "Grupa veche: " << st1.get_grupa() << '\n';
     Student::transfer_grupa(st1, 132);
+    Facultate::transfer_grupa(fac2, st1);
     std::cout << "Grupa noua: " << st1.get_grupa() << '\n';
     std::cout << st1 << '\n' << st2 << '\n';
     Student::schimbare_grupe_2_studenti(st1, st2);
+    Facultate::schimbare_grupe_2_studenti(fac2, st1, st2);
     std::cout << "Au fost schimbati studentii!\n";
     std::cout << st1 << '\n' << st2;
     Profesor::sortare_grupe(pr);
