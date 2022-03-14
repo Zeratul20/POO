@@ -52,9 +52,10 @@ public:
         return false;
     }
 
-    static bool check(Student &s1, const Student& s2) {
-        if(s1 == s2)
+    static bool check(Student s1, const Student& s2) {
+        if(s1 == s2){
             return true;
+        }
         return false;
     }
 
