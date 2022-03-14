@@ -83,11 +83,17 @@ public:
         return grupe;
     }
 
+    bool operator==(const Profesor &other) {
+        if(this -> nume == other.nume and this -> grupe == other.grupe)
+            return true;
+        return false;
+    }
+
     static void sortare_grupe(Profesor &pr) {
         std::sort(pr.grupe.begin(), pr.grupe.end());
     }
 
-    static void leave_group(Profesor &pr, int grupa) {
+    static void prof_leave_group(Profesor &pr, int grupa) {
         for(int i = 0; i < pr.grupe.size(); i++) {
             if(pr.grupe[i] == grupa) {
                 for(int j = i; j < pr.grupe.size() - 1; j++)
@@ -98,7 +104,7 @@ public:
         pr.grupe.pop_back();
         std::sort(pr.grupe.begin(), pr.grupe.end());
     }
-    static void add_group(Profesor &pr, int grupa) {
+    static void prof_add_group(Profesor &pr, int grupa) {
         pr.grupe.push_back(grupa);
         std::sort(pr.grupe.begin(), pr.grupe.end());
     }
@@ -184,15 +190,22 @@ public:
     [[maybe_unused]] Secretariat get_secretariat() {
         return Sec;
     }
-    static void transfer_grupa(Facultate &f, Student &s) {
-        for(auto & i : f.St)
-            if(i == s) {
-                i.grupa = s.grupa;
-                break;
+    static int find_student(Facultate &f, const Student& s) {
+        int ans = 0;
+        for(int i = 0; i < f.St.size(); i++)
+            if(f.St[i] == s) {
+                ans = i;
+                return ans;
             }
+        return ans;
     }
 
-    static void schimbare_grupe_2_studenti(Facultate &f, Student &s1, Student &s2) {
+    static void update_student(Facultate &f, const Student& s1, const Student& s2) {
+        int x = Facultate::find_student(f, s1);
+        f.St[x] = s2;
+    }
+
+    /*static void schimbare_grupe_2_studenti(Facultate &f, Student s1, Student s2) {
         int x = 0, y = 0;
         for(int i = 0; i<f.St.size(); i++)
             if(f.St[i] == s1) {
@@ -205,8 +218,24 @@ public:
                 break;
             }
         std::swap(f.St[x], f.St[y]);
+    }*/
+
+    static int find_prof(Facultate &f, const Profesor& pr) {
+        int ans = 0;
+        for(int i = 0; i < f.Pr.size(); i++) {
+            if(f.Pr[i] == pr) {
+                ans = i;
+                return ans;
+            }
+        }
+        return ans;
     }
-    friend class Student;
+
+    static void update_prof(Facultate &f, const Profesor& pr1, const Profesor& pr2) {
+        int x = Facultate::find_prof(f, pr1);
+        f.Pr[x] = pr2;
+    }
+
     friend std::ostream &operator<<(std::ostream &os, const Facultate &f);
 };
 
@@ -264,6 +293,7 @@ int main() {
     Student st1{"Ionescu", 131, 7.8};
     Student st2{"Georgescu", 151, 5.8};
     Student st3 = st1;
+    Student oldst1 = st1, oldst2 = st2, oldst = st3;
     Secretariat sc{"Contabilitate", 10, "Alina"};
     Profesor pr{"Paun", {131, 152, 143, 141, 151}};
     Facultate fac{"Poli", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
@@ -272,12 +302,15 @@ int main() {
     //std::cout << "Studenti\n" << fac2.get_studenti() << "\nProfesori\n" << fac2.get_profesori() << "\nSecretariat\n" << fac2.get_secretariat() << '\n';
     std::cout << fac2;
     std::cout << "Grupa veche: " << st1.get_grupa() << '\n';
+    oldst1 = st1;
     Student::transfer_grupa(st1, 132);
-    Facultate::transfer_grupa(fac2, st1);
-    std::cout << "Grupa noua: " << st1.get_grupa() << '\n';
+    Facultate::update_student(fac2, oldst1, st1);
+    std::cout << fac2;
     std::cout << st1 << '\n' << st2 << '\n';
+    oldst1 = st1, oldst2 = st2;
     Student::schimbare_grupe_2_studenti(st1, st2);
-    Facultate::schimbare_grupe_2_studenti(fac2, st1, st2);
+    Facultate::update_student(fac2, oldst1, st1);
+    Facultate::update_student(fac2, oldst2, st2);
     std::cout << "Au fost schimbati studentii!\n";
     std::cout << st1 << '\n' << st2;
     Profesor::sortare_grupe(pr);
@@ -286,11 +319,11 @@ int main() {
         std::cout << pr.get_grupe()[i] << ' ';
     std::cout << '\n';
     std::cout << "Profesor Paraseste grupa 131\n";
-    Profesor::leave_group(pr, 131);
+    Profesor::prof_leave_group(pr, 131);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     std::cout << "A fost adauugata grupa 133\n";
-    Profesor::add_group(pr, 133);
+    Profesor::prof_add_group(pr, 133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     Facultate::student_leaves(fac2, st3);
