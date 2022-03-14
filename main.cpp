@@ -46,7 +46,7 @@ public:
     }
     Student &operator=(const Student &other) = default;
 
-    bool operator==(const Student &other) {
+    bool operator==(const Student& other) {
         if(this -> nume == other.nume and this -> grupa == other.grupa and this -> medie == other.medie)
             return true;
         return false;
@@ -168,7 +168,7 @@ public:
 
     static void student_leaves(Facultate &f, const Student& s) {
         for(int i = 0; i < f.St.size(); i++) {
-            if(Student::check(f.St[i], s)) {
+            if(Student::check(s, f.St[i])) {
                 for(int j = i; j < f.St.size() - 1; j++)
                     f.St[j] = f.St[j + 1];
                 break;
