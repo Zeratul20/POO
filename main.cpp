@@ -7,8 +7,8 @@ class Facultate;
 
 class Student {
     std::string nume;
-    int grupa;
-    double medie;
+    int grupa{};
+    double medie{};
 public:
     Student(std::string nume, int grupa, double medie):nume{std::move(nume)}, grupa{grupa}, medie{medie} {
         /*this -> nume = nume;
@@ -22,6 +22,7 @@ public:
         this -> medie = other.medie;
         //std::cout<<"CC Student\n";
     }
+    Student() = default;
     ~Student() = default;
     [[nodiscard]] std::string get_nume() const {
         return nume;
@@ -58,7 +59,6 @@ public:
     }
 
     friend class Facultate;
-
 };
 
 class Profesor {
@@ -75,6 +75,7 @@ public:
         this -> grupe = other.grupe;
         //std::cout<<"CC profesor\n";
     }
+    Profesor() = default;
     ~Profesor() = default;
     [[nodiscard]] std::string get_nume() const {
         return nume;
@@ -268,8 +269,8 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
     os << "Studenti:\n";
     for(const auto & i : f.St)
     {
-        os << i.get_grupa() << ' ';
         os << i.get_nume() << ' ';
+        os << i.get_grupa() << ' ';
         os << i.get_medie() << ' ';
         os << '\n';
     }
@@ -293,11 +294,14 @@ int main() {
     Student st1{"Ionescu", 131, 7.8};
     Student st2{"Georgescu", 151, 5.8};
     Student st3 = st1;
-    Student oldst1 = st1, oldst2 = st2, oldst = st3;
+    Student oldst1;
+    Student oldst2;
+    Student oldst3;
     Secretariat sc{"Contabilitate", 10, "Alina"};
-    Profesor pr{"Paun", {131, 152, 143, 141, 151}};
+    Profesor pr{"Paun", {131, 152, 143, 141, 151}}, pr2{"Anca", {131, 142, 141, 134, 152}};
+    Profesor oldpr, oldpr2;
     Facultate fac{"Poli", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
-    Facultate fac2{"FMI", {st1, st2, st3}, {pr}, sc};
+    Facultate fac2{"FMI", {st1, st2, st3}, {pr, pr2}, sc};
     std::cout << "FMI\n";
     //std::cout << "Studenti\n" << fac2.get_studenti() << "\nProfesori\n" << fac2.get_profesori() << "\nSecretariat\n" << fac2.get_secretariat() << '\n';
     std::cout << fac2;
@@ -319,10 +323,12 @@ int main() {
         std::cout << pr.get_grupe()[i] << ' ';
     std::cout << '\n';
     std::cout << "Profesor Paraseste grupa 131\n";
+    oldpr = pr;
     Profesor::prof_leave_group(pr, 131);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
-    std::cout << "A fost adauugata grupa 133\n";
+    Facultate::update_prof(fac2, oldpr, pr);
+    std::cout << "A fost adaugata grupa 133\n";
     Profesor::prof_add_group(pr, 133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
