@@ -92,7 +92,7 @@ public:
     }
 
     static void sortare_grupe(Profesor &pr) {
-        std::sort(pr.grupe.begin(), pr.grupe.end());
+        sort(pr.grupe.begin(), pr.grupe.end());
     }
 
     static void prof_leave_group(Profesor &pr, int grupa) {
@@ -104,11 +104,11 @@ public:
             }
         }
         pr.grupe.pop_back();
-        std::sort(pr.grupe.begin(), pr.grupe.end());
+        sort(pr.grupe.begin(), pr.grupe.end());
     }
     static void prof_add_group(Profesor &pr, int grupa) {
         pr.grupe.push_back(grupa);
-        std::sort(pr.grupe.begin(), pr.grupe.end());
+        sort(pr.grupe.begin(), pr.grupe.end());
     }
     friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
 };
