@@ -108,7 +108,7 @@ public:
     }
     static void prof_add_group(Profesor &pr, int grupa) {
         pr.grupe.push_back(grupa);
-        sort(pr.grupe.begin(), pr.grupe.end());
+        sort(pr.grupe.begin(), pr.grupe.end(), [](int x, int y){return x < y;});
     }
     friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
 };
