@@ -52,12 +52,12 @@ public:
         return false;
     }
 
-    static bool check(Student s1, const Student& s2) {
+    /*static bool check(Student s1, const Student& s2) {
         if(s1 == s2){
             return true;
         }
         return false;
-    }
+    }*/
 
     friend class Facultate;
 };
@@ -168,7 +168,7 @@ public:
 
     static void student_leaves(Facultate &f, const Student& s) {
         for(int i = 0; i < f.St.size(); i++) {
-            if(Student::check(s, f.St[i])) {
+            if(f.St[i] == s) {
                 for(int j = i; j < f.St.size() - 1; j++)
                     f.St[j] = f.St[j + 1];
                 break;
