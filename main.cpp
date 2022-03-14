@@ -185,13 +185,13 @@ public:
         return St;
     }
 
-    [[maybe_unused]] std::vector<Profesor> get_profesori() {
+    /*[[maybe_unused]] std::vector<Profesor> get_profesori() {
         return Pr;
     }
 
     [[maybe_unused]] Secretariat get_secretariat() {
         return Sec;
-    }
+    }*/
     static int find_student(Facultate &f, const Student& s) {
         int ans = 0;
         for(int i = 0; i < f.St.size(); i++)
