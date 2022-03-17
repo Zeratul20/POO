@@ -109,28 +109,25 @@ public:
         pr.grupe.push_back(grupa);
         std::sort(pr.grupe.begin(), pr.grupe.end());
     }
+
+    Profesor &operator=(const Profesor &other) = default;
+
     friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
 };
 
 class Secretariat {
-    std::string departament;
     int numar_angajati;
     std::string secretar_sef;
 public:
-    Secretariat(std::string departament, int numar_angajati, std::string secretar_sef):departament{std::move(departament)}, numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
-        /*this -> departament = departament;
-        this -> numar_angajati = numar_angajati;
+    Secretariat(int numar_angajati, std::string secretar_sef):numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
+        /*this -> numar_angajati = numar_angajati;
         this -> secretar_sef = secretar_sef;*/
         std::cout<<"Secretariat init\n";
     }
-    Secretariat(const Secretariat &other):departament(other.departament), numar_angajati(other.numar_angajati), secretar_sef(other.secretar_sef) {
-        this -> departament = other.departament;
+    Secretariat(const Secretariat &other):numar_angajati(other.numar_angajati), secretar_sef(other.secretar_sef) {
         this -> numar_angajati = other.numar_angajati;
         this -> secretar_sef = other.secretar_sef;
         //std::cout<<"CC secretariat\n";
-    }
-    [[nodiscard]] std::string get_departament() const {
-        return departament;
     }
     [[nodiscard]] int get_numar_angajati() const {
         return numar_angajati;
@@ -139,6 +136,12 @@ public:
         return secretar_sef;
     }
     ~Secretariat() = default;
+    static void vin_secretari(Secretariat &sec, int nr_noi) {
+        sec.numar_angajati += nr_noi;
+    }
+
+    Secretariat &operator=(const Secretariat &other) = default;
+
     friend std::ostream &operator<<(std::ostream &os, const Secretariat &sec);
 };
 class Facultate {
@@ -237,6 +240,9 @@ public:
         f.Pr[x] = pr2;
     }
 
+    static void update_secretariat(Facultate &f, const Secretariat& sec) {
+        f.Sec = sec;
+    }
     friend std::ostream &operator<<(std::ostream &os, const Facultate &f);
 };
 
@@ -257,7 +263,6 @@ std::ostream &operator<<(std::ostream &os, const Profesor &pr) {
 }
 
 std::ostream &operator<<(std::ostream &os, const Secretariat &sec) {
-    os << sec.departament << ' ';
     os << sec.numar_angajati << ' ';
     os << sec.secretar_sef << ' ';
     return os;
@@ -286,7 +291,7 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
     }
     os << '\n';
     os << "Secretariat:\n";
-    os << f.Sec.get_departament() << ' ' << f.Sec.get_numar_angajati() << ' ' << f.Sec.get_secretar_sef() << '\n';
+    os << f.Sec.get_numar_angajati() << ' ' << f.Sec.get_secretar_sef() << '\n';
     return os;
 }
 
@@ -297,11 +302,12 @@ int main() {
     Student oldst1;
     Student oldst2;
     Student oldst3;
-    Secretariat sc{"Contabilitate", 10, "Alina"};
+    Secretariat sc{10, "Alina"};
     Profesor pr{"Paun", {131, 152, 143, 141, 151}}, pr2{"Anca", {131, 142, 141, 134, 152}};
     Profesor oldpr, oldpr2;
-    Facultate fac{"Poli", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {"Contabilitate", 10, "Alina"}};
+    Facultate fac{"Poli", {{"Ionescu", 131, 7.8}, {"Georgescu", 151, 9}}, {{"Paun", {131, 151}}}, {10, "Alina"}};
     Facultate fac2{"FMI", {st1, st2, st3}, {pr, pr2}, sc};
+    Secretariat sec{10, "Alina"};
     std::cout << "FMI\n";
     //std::cout << "Studenti\n" << fac2.get_studenti() << "\nProfesori\n" << fac2.get_profesori() << "\nSecretariat\n" << fac2.get_secretariat() << '\n';
     std::cout << fac2;
@@ -328,10 +334,15 @@ int main() {
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     Facultate::update_prof(fac2, oldpr, pr);
+    Secretariat::vin_secretari(sec, 5);
+    Facultate::update_secretariat(fac2, sec);
+    std::cout << fac2 << '\n';
     std::cout << "A fost adaugata grupa 133\n";
+    oldpr = pr;
     Profesor::prof_add_group(pr, 133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
+    Facultate::update_prof(fac2, oldpr, pr);
     Facultate::student_leaves(fac2, st3);
     st3 = {"Gigescu", 142, 4};
     std::cout << st3 <<'\n';
