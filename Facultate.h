@@ -29,31 +29,9 @@ public:
 
     std::vector<Student> get_studenti();
 
-    /*[[maybe_unused]] std::vector<Profesor> get_profesori() {
-        return Pr;
-    }
-
-    [[maybe_unused]] Secretariat get_secretariat() {
-        return Sec;
-    }*/
     static int find_student(Facultate &f, const Student& s);
 
     static void update_student(Facultate &f, const Student& s1, const Student& s2);
-
-    /*static void schimbare_grupe_2_studenti(Facultate &f, Student s1, Student s2) {
-        int x = 0, y = 0;
-        for(int i = 0; i<f.St.size(); i++)
-            if(f.St[i] == s1) {
-                x = i;
-                break;
-            }
-        for(int i = 0; i<f.St.size(); i++)
-            if(f.St[i] == s2) {
-                y = i;
-                break;
-            }
-        std::swap(f.St[x], f.St[y]);
-    }*/
 
     static int find_prof(Facultate &f, const Profesor& pr);
 

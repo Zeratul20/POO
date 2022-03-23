@@ -9,14 +9,10 @@
 
 Profesor::Profesor(const std::string &nume) : nume(nume) {}
 Profesor::Profesor(std::string nume, std::vector<int> grupe) :nume{std::move(nume)}, grupe{std::move(grupe)} {
-    /*this -> nume = nume;
-    this -> grupe = grupe;*/
-    //std::cout<<"Profesor init\n";
 }
 Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe) {
     this -> nume = other.nume;
     this -> grupe = other.grupe;
-    //std::cout<<"CC profesor\n";
 }
 
 std::string Profesor::get_nume() const {

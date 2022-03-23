@@ -8,11 +8,6 @@
 
 Facultate::Facultate(std::string nume, std::vector<Student> St, std::vector<Profesor> Pr, const Secretariat &Sec)
         :nume{std::move(nume)}, St{std::move(St)}, Pr{std::move(Pr)}, Sec(Sec) {
-    /*this -> nume = nume;
-    this -> St = St;
-    this -> Pr = Pr;
-    this -> Sec = Sec;*/
-    //std::cout<<"init facultate\n";
 }
 
 Facultate::Facultate(const Facultate &other) :nume(other.nume), St(other.St), Pr(other.Pr), Sec(other.Sec)
@@ -21,7 +16,6 @@ Facultate::Facultate(const Facultate &other) :nume(other.nume), St(other.St), Pr
     this -> St = other.St;
     this -> Pr = other.Pr;
     this -> Sec = other.Sec;
-    //std::cout<<"CC facultate\n";
 }
 
 void Facultate::student_leaves(Facultate &f, const Student &s) {

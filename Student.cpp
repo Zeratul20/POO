@@ -5,17 +5,12 @@
 #include "Student.h"
 
 Student::Student(std::string nume, int grupa, double medie) :nume{std::move(nume)}, grupa{grupa}, medie{medie} {
-    /*this -> nume = nume;
-    this -> grupa = grupa;
-    this -> medie = medie;*/
-    //std::cout<<"Student init\n";
 }
 
 Student::Student(const Student &other) :nume(other.nume), grupa(other.grupa), medie(other.medie) {
     this -> nume = other.nume;
     this -> grupa = other.grupa;
     this -> medie = other.medie;
-    //std::cout<<"CC Student\n";
 }
 
 std::string Student::get_nume() const {

@@ -7,16 +7,12 @@
 
 Secretariat::Secretariat(int numar_angajati, std::string secretar_sef)
         :numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
-    /*this -> numar_angajati = numar_angajati;
-    this -> secretar_sef = secretar_sef;*/
-    //std::cout<<"Secretariat init\n";
 }
 
 Secretariat::Secretariat(const Secretariat &other)
         :numar_angajati(other.numar_angajati), secretar_sef(other.secretar_sef) {
     this -> numar_angajati = other.numar_angajati;
     this -> secretar_sef = other.secretar_sef;
-    //std::cout<<"CC secretariat\n";
 }
 
 int Secretariat::get_numar_angajati() const {
