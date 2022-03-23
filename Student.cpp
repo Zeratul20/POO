@@ -1,0 +1,52 @@
+//
+// Created by utilizator on 23.03.2022.
+//
+#include <iostream>
+#include "Student.h"
+
+Student::Student(std::string nume, int grupa, double medie) :nume{std::move(nume)}, grupa{grupa}, medie{medie} {
+    /*this -> nume = nume;
+    this -> grupa = grupa;
+    this -> medie = medie;*/
+    //std::cout<<"Student init\n";
+}
+
+Student::Student(const Student &other) :nume(other.nume), grupa(other.grupa), medie(other.medie) {
+    this -> nume = other.nume;
+    this -> grupa = other.grupa;
+    this -> medie = other.medie;
+    //std::cout<<"CC Student\n";
+}
+
+std::string Student::get_nume() const {
+    return nume;
+}
+
+int Student::get_grupa() const {
+    return grupa;
+}
+
+double Student::get_medie() const {
+    return medie;
+}
+
+std::ostream &operator<<(std::ostream &os, const Student &st) {
+    os << st.nume << ' ';
+    os << st.grupa << ' ';
+    os << st.medie << ' ';
+    return os;
+}
+
+void Student::transfer_grupa(Student &s, int grupa_noua) {
+    s.grupa = grupa_noua;
+}
+
+void Student::schimbare_grupe_2_studenti(Student &s1, Student &s2) {
+    std::swap(s1.grupa, s2.grupa);
+}
+
+bool Student::operator==(const Student &other) {
+    if(this -> nume == other.nume and this -> grupa == other.grupa and this -> medie == other.medie)
+        return true;
+    return false;
+}

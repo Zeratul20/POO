@@ -1,149 +1,12 @@
-#include<algorithm>
+#include <algorithm>
 #include <iostream>
 #include <vector>
-class Student;
-class Profesor;
-class Secretariat;
+#include "Student.h"
+#include "Profesor.h"
+#include "Secretariat.h"
+
 class Facultate;
 
-class Student {
-    std::string nume;
-    int grupa{};
-    double medie{};
-public:
-    Student(std::string nume, int grupa, double medie):nume{std::move(nume)}, grupa{grupa}, medie{medie} {
-        /*this -> nume = nume;
-        this -> grupa = grupa;
-        this -> medie = medie;*/
-        std::cout<<"Student init\n";
-    }
-    Student(const Student &other):nume(other.nume), grupa(other.grupa), medie(other.medie) {
-        this -> nume = other.nume;
-        this -> grupa = other.grupa;
-        this -> medie = other.medie;
-        //std::cout<<"CC Student\n";
-    }
-    Student() = default;
-    ~Student() = default;
-    [[nodiscard]] std::string get_nume() const {
-        return nume;
-    }
-    [[nodiscard]] int get_grupa() const {
-        return grupa;
-    }
-
-    [[nodiscard]] double get_medie() const {
-        return medie;
-    }
-    friend std::ostream &operator<<(std::ostream &os, const Student &st);
-
-
-    static void transfer_grupa(Student &s, int grupa_noua) {
-        s.grupa = grupa_noua;
-    }
-
-    static void schimbare_grupe_2_studenti(Student &s1, Student &s2) {
-        std::swap(s1.grupa, s2.grupa);
-    }
-    Student &operator=(const Student &other) = default;
-
-    bool operator==(const Student& other) {
-        if(this -> nume == other.nume and this -> grupa == other.grupa and this -> medie == other.medie)
-            return true;
-        return false;
-    }
-
-    /*static bool check(Student s1, const Student& s2) {
-        if(s1 == s2){
-            return true;
-        }
-        return false;
-    }*/
-};
-
-class Profesor {
-    std::string nume;
-    std::vector<int>grupe;
-public:
-    Profesor(std::string nume, std::vector<int>grupe):nume{std::move(nume)}, grupe{std::move(grupe)} {
-        /*this -> nume = nume;
-        this -> grupe = grupe;*/
-        std::cout<<"Profesor init\n";
-    }
-    Profesor(const Profesor &other):nume(other.nume), grupe(other.grupe) {
-        this -> nume = other.nume;
-        this -> grupe = other.grupe;
-        //std::cout<<"CC profesor\n";
-    }
-    Profesor() = default;
-    ~Profesor() = default;
-    [[nodiscard]] std::string get_nume() const {
-        return nume;
-    }
-    [[nodiscard]] std::vector<int> get_grupe() const {
-        return grupe;
-    }
-
-    bool operator==(const Profesor &other) {
-        if(this -> nume == other.nume and this -> grupe == other.grupe)
-            return true;
-        return false;
-    }
-
-    static void sortare_grupe(Profesor &pr) {
-        std::sort(pr.grupe.begin(), pr.grupe.end());
-    }
-
-    static void prof_leave_group(Profesor &pr, int grupa) {
-        for(int i = 0; i < pr.grupe.size(); i++) {
-            if(pr.grupe[i] == grupa) {
-                for(int j = i; j < pr.grupe.size() - 1; j++)
-                    pr.grupe[j] = pr.grupe[j + 1];
-                break;
-            }
-        }
-        pr.grupe.pop_back();
-        std::sort(pr.grupe.begin(), pr.grupe.end());
-    }
-    static void prof_add_group(Profesor &pr, int grupa) {
-        pr.grupe.push_back(grupa);
-        std::sort(pr.grupe.begin(), pr.grupe.end());
-    }
-
-    Profesor &operator=(const Profesor &other) = default;
-
-    friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
-};
-
-class Secretariat {
-    int numar_angajati;
-    std::string secretar_sef;
-public:
-    Secretariat(int numar_angajati, std::string secretar_sef):numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
-        /*this -> numar_angajati = numar_angajati;
-        this -> secretar_sef = secretar_sef;*/
-        std::cout<<"Secretariat init\n";
-    }
-    Secretariat(const Secretariat &other):numar_angajati(other.numar_angajati), secretar_sef(other.secretar_sef) {
-        this -> numar_angajati = other.numar_angajati;
-        this -> secretar_sef = other.secretar_sef;
-        //std::cout<<"CC secretariat\n";
-    }
-    [[nodiscard]] int get_numar_angajati() const {
-        return numar_angajati;
-    }
-    [[nodiscard]] std::string get_secretar_sef() const {
-        return secretar_sef;
-    }
-    ~Secretariat() = default;
-    static void vin_secretari(Secretariat &sec, int nr_noi) {
-        sec.numar_angajati += nr_noi;
-    }
-
-    Secretariat &operator=(const Secretariat &other) = default;
-
-    friend std::ostream &operator<<(std::ostream &os, const Secretariat &sec);
-};
 class Facultate {
     std::string nume;
     std::vector<Student>St;
@@ -155,7 +18,7 @@ public:
         this -> St = St;
         this -> Pr = Pr;
         this -> Sec = Sec;*/
-        std::cout<<"init facultate\n";
+        //std::cout<<"init facultate\n";
     }
     Facultate(const Facultate &other):nume(other.nume), St(other.St), Pr(other.Pr), Sec(other.Sec)
     {
@@ -245,28 +108,6 @@ public:
     }
     friend std::ostream &operator<<(std::ostream &os, const Facultate &f);
 };
-
-std::ostream &operator<<(std::ostream &os, const Student &st) {
-    os << st.nume << ' ';
-    os << st.grupa << ' ';
-    os << st.medie << ' ';
-    return os;
-}
-
-
-std::ostream &operator<<(std::ostream &os, const Profesor &pr) {
-    os << pr.nume << '\n';
-    for(int i : pr.grupe) {
-        os << i << ' ';
-    }
-    return os;
-}
-
-std::ostream &operator<<(std::ostream &os, const Secretariat &sec) {
-    os << sec.numar_angajati << ' ';
-    os << sec.secretar_sef << ' ';
-    return os;
-}
 
 std::ostream &operator<<(std::ostream &os, const Facultate &f) {
     os << "Nume facultate: " << f.nume << '\n';
