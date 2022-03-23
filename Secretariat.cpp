@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "Secretariat.h"
+#include <algorithm>
 
 Secretariat::Secretariat(int numar_angajati, std::string secretar_sef)
         :numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {

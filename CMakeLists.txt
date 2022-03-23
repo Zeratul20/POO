@@ -3,6 +3,6 @@ project(oop)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(oop main.cpp Student.cpp Student.h Profesor.cpp Profesor.h Secretariat.cpp Secretariat.h)
+add_executable(oop main.cpp Student.cpp Student.h Profesor.cpp Profesor.h Secretariat.cpp Secretariat.h Facultate.cpp Facultate.h)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
