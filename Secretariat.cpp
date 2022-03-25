@@ -23,8 +23,8 @@ std::string Secretariat::get_secretar_sef() const {
     return secretar_sef;
 }
 
-void Secretariat::vin_secretari(Secretariat &sec, int nr_noi) {
-    sec.numar_angajati += nr_noi;
+void Secretariat::vin_secretari(int nr_noi) {
+    this -> numar_angajati += nr_noi;
 }
 
 std::ostream &operator<<(std::ostream &os, const Secretariat &sec) {

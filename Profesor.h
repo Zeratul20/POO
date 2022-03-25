@@ -24,10 +24,10 @@ public:
 
     bool operator==(const Profesor &other);
 
-    static void sortare_grupe(Profesor &pr);
+    void sortare_grupe();
 
-    static void prof_leave_group(Profesor &pr, int grupa);
-    static void prof_add_group(Profesor &pr, int grupa);
+    void prof_leave_group(int grupa);
+    void prof_add_group(int grupa);
 
     Profesor &operator=(const Profesor &other) = default;
 

@@ -32,12 +32,12 @@ std::ostream &operator<<(std::ostream &os, const Student &st) {
     return os;
 }
 
-void Student::transfer_grupa(Student &s, int grupa_noua) {
-    s.grupa = grupa_noua;
+void Student::transfer_grupa(int grupa_noua) {
+    this -> grupa = grupa_noua;
 }
 
-void Student::schimbare_grupe_2_studenti(Student &s1, Student &s2) {
-    std::swap(s1.grupa, s2.grupa);
+void Student::schimbare_grupe_2_studenti(Student &s2) {
+    std::swap(this -> grupa, s2.grupa);
 }
 
 bool Student::operator==(const Student &other) {

@@ -18,44 +18,44 @@ Facultate::Facultate(const Facultate &other) :nume(other.nume), St(other.St), Pr
     this -> Sec = other.Sec;
 }
 
-void Facultate::student_leaves(Facultate &f, const Student &s) {
-    for(int i = 0; i < f.St.size(); i++) {
-        if(f.St[i] == s) {
-            for(int j = i; j < f.St.size() - 1; j++)
-                f.St[j] = f.St[j + 1];
+void Facultate::student_leaves(const Student &s) {
+    for(int i = 0; i < this -> St.size(); i++) {
+        if(this -> St[i] == s) {
+            for(int j = i; j < this -> St.size() - 1; j++)
+                this -> St[j] = this -> St[j + 1];
             break;
         }
     }
-    f.St.pop_back();
+    this -> St.pop_back();
 }
 
-void Facultate::student_nou(Facultate &f, const Student &s) {
-    f.St.push_back(s);
+void Facultate::student_nou(const Student &s) {
+    this -> St.push_back(s);
 }
 
 std::vector<Student> Facultate::get_studenti() {
     return St;
 }
 
-int Facultate::find_student(Facultate &f, const Student &s) {
+int Facultate::find_student(const Student &s) {
     int ans = 0;
-    for(int i = 0; i < f.St.size(); i++)
-        if(f.St[i] == s) {
+    for(int i = 0; i < this -> St.size(); i++)
+        if(this -> St[i] == s) {
             ans = i;
             return ans;
         }
     return ans;
 }
 
-void Facultate::update_student(Facultate &f, const Student &s1, const Student &s2) {
-    int x = Facultate::find_student(f, s1);
-    f.St[x] = s2;
+void Facultate::update_student(const Student &s1, const Student &s2) {
+    int x = Facultate::find_student(s1);
+    this -> St[x] = s2;
 }
 
-int Facultate::find_prof(Facultate &f, const Profesor &pr) {
+int Facultate::find_prof(const Profesor &pr) {
     int ans = 0;
-    for(int i = 0; i < f.Pr.size(); i++) {
-        if(f.Pr[i] == pr) {
+    for(int i = 0; i < this -> Pr.size(); i++) {
+        if(this -> Pr[i] == pr) {
             ans = i;
             return ans;
         }
@@ -63,13 +63,13 @@ int Facultate::find_prof(Facultate &f, const Profesor &pr) {
     return ans;
 }
 
-void Facultate::update_prof(Facultate &f, const Profesor &pr1, const Profesor &pr2) {
-    int x = Facultate::find_prof(f, pr1);
-    f.Pr[x] = pr2;
+void Facultate::update_prof(const Profesor &pr1, const Profesor &pr2) {
+    int x = Facultate::find_prof(pr1);
+    this -> Pr[x] = pr2;
 }
 
-void Facultate::update_secretariat(Facultate &f, const Secretariat &sec) {
-    f.Sec = sec;
+void Facultate::update_secretariat(const Secretariat &sec) {
+    this -> Sec = sec;
 }
 
 std::ostream &operator<<(std::ostream &os, const Facultate &f) {

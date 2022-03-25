@@ -16,7 +16,7 @@ public:
     [[nodiscard]] int get_numar_angajati() const;
     [[nodiscard]] std::string get_secretar_sef() const;
     ~Secretariat() = default;
-    static void vin_secretari(Secretariat &sec, int nr_noi);
+    void vin_secretari(int nr_noi);
 
     Secretariat &operator=(const Secretariat &other) = default;
 

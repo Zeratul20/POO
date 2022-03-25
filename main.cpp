@@ -24,44 +24,44 @@ int main() {
     std::cout << fac2;
     std::cout << "Grupa veche: " << st1.get_grupa() << '\n';
     oldst1 = st1;
-    Student::transfer_grupa(st1, 132);
-    Facultate::update_student(fac2, oldst1, st1);
+    st1.transfer_grupa(132);
+    fac2.update_student(oldst1, st1);
     std::cout << fac2;
     std::cout << st1 << '\n' << st2 << '\n';
     oldst1 = st1, oldst2 = st2;
-    Student::schimbare_grupe_2_studenti(st1, st2);
-    Facultate::update_student(fac2, oldst1, st1);
-    Facultate::update_student(fac2, oldst2, st2);
+    st1.schimbare_grupe_2_studenti(st2);
+    fac2.update_student(oldst1, st1);
+    fac2.update_student(oldst2, st2);
     std::cout << "Au fost schimbati studentii!\n";
     std::cout << st1 << '\n' << st2;
-    Profesor::sortare_grupe(pr);
+    pr.sortare_grupe();
     std::cout << "Grupe inainte\n";
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     std::cout << '\n';
     std::cout << "Profesor Paraseste grupa 131\n";
     oldpr = pr;
-    Profesor::prof_leave_group(pr, 131);
+    pr.prof_leave_group(131);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
-    Facultate::update_prof(fac2, oldpr, pr);
-    Secretariat::vin_secretari(sec, 5);
-    Facultate::update_secretariat(fac2, sec);
+    fac2.update_prof(oldpr, pr);
+    sec.vin_secretari(5);
+    fac2.update_secretariat(sec);
     std::cout << fac2 << '\n';
     std::cout << "A fost adaugata grupa 133\n";
     oldpr = pr;
-    Profesor::prof_add_group(pr, 133);
+    pr.prof_add_group(133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
-    Facultate::update_prof(fac2, oldpr, pr);
-    Facultate::student_leaves(fac2, st3);
+    fac2.update_prof(oldpr, pr);
+    fac2.student_leaves(st3);
     st3 = {"Gigescu", 142, 4};
     std::cout << st3 <<'\n';
-    Facultate::student_nou(fac2, st3);
+    fac2.student_nou(st3);
     std::cout << "Toti studentii\n";
     for(int i = 0; i < fac2.get_studenti().size(); i++)
         std::cout << fac2.get_studenti()[i] << ' ';
-    Facultate::student_leaves(fac2, st2);
+    fac2.student_leaves(st2);
     std::cout << '\n' << st2 << '\n' << "Abandoneaza studentul\n";
     for(int i = 0; i < fac2.get_studenti().size(); i++)
         std::cout << fac2.get_studenti()[i] << ' ';

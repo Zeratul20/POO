@@ -24,9 +24,9 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Student &st);
 
 
-    static void transfer_grupa(Student &s, int grupa_noua);
+    void transfer_grupa(int grupa_noua);
 
-    static void schimbare_grupe_2_studenti(Student &s1, Student &s2);
+    void schimbare_grupe_2_studenti(Student &s2);
     Student &operator=(const Student &other) = default;
 
     bool operator==(const Student& other);

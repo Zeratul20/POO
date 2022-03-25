@@ -8,8 +8,7 @@
 #include <algorithm>
 
 Profesor::Profesor(const std::string &nume) : nume(nume) {}
-Profesor::Profesor(std::string nume, std::vector<int> grupe) :nume{std::move(nume)}, grupe{std::move(grupe)} {
-}
+Profesor::Profesor(std::string nume, std::vector<int> grupe) :nume{std::move(nume)}, grupe{std::move(grupe)} {}
 Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe) {
     this -> nume = other.nume;
     this -> grupe = other.grupe;
@@ -29,25 +28,25 @@ bool Profesor::operator==(const Profesor &other) {
     return false;
 }
 
-void Profesor::sortare_grupe(Profesor &pr) {
-    std::sort(pr.grupe.begin(), pr.grupe.end());
+void Profesor::sortare_grupe() {
+    std::sort(this -> grupe.begin(), this -> grupe.end());
 }
 
-void Profesor::prof_leave_group(Profesor &pr, int grupa) {
-    for(int i = 0; i < pr.grupe.size(); i++) {
-        if(pr.grupe[i] == grupa) {
-            for(int j = i; j < pr.grupe.size() - 1; j++)
-                pr.grupe[j] = pr.grupe[j + 1];
+void Profesor::prof_leave_group(int grupa) {
+    for(int i = 0; i < this -> grupe.size(); i++) {
+        if(this -> grupe[i] == grupa) {
+            for(int j = i; j < this -> grupe.size() - 1; j++)
+                this -> grupe[j] = this -> grupe[j + 1];
             break;
         }
     }
-    pr.grupe.pop_back();
-    std::sort(pr.grupe.begin(), pr.grupe.end());
+    this -> grupe.pop_back();
+    std::sort(this -> grupe.begin(), this -> grupe.end());
 }
 
-void Profesor::prof_add_group(Profesor &pr, int grupa) {
-    pr.grupe.push_back(grupa);
-    std::sort(pr.grupe.begin(), pr.grupe.end());
+void Profesor::prof_add_group(int grupa) {
+    this -> grupe.push_back(grupa);
+    std::sort(this -> grupe.begin(), this -> grupe.end());
 }
 
 std::ostream &operator<<(std::ostream &os, const Profesor &pr) {
