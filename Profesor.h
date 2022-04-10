@@ -16,7 +16,7 @@ public:
     Profesor(const Profesor &other);
     Profesor() = default;
 
-    explicit Profesor(const std::string &nume);
+    explicit Profesor(std::string nume);
 
     ~Profesor() = default;
     [[nodiscard]] std::string get_nume() const;

@@ -5,20 +5,15 @@
 #include "Facultate.h"
 #include <iostream>
 #include <algorithm>
+#include <utility>
 
-Facultate::Facultate(std::string nume, std::vector<Student> St, std::vector<Profesor> Pr, const Secretariat &Sec)
+Facultate::Facultate(std::string nume, std::vector<std::shared_ptr<Student>> St, std::vector<Profesor> Pr, const Secretariat &Sec)
         :nume{std::move(nume)}, St{std::move(St)}, Pr{std::move(Pr)}, Sec(Sec) {
 }
 
-Facultate::Facultate(const Facultate &other) :nume(other.nume), St(other.St), Pr(other.Pr), Sec(other.Sec)
-{
-    this -> nume = other.nume;
-    this -> St = other.St;
-    this -> Pr = other.Pr;
-    this -> Sec = other.Sec;
-}
+Facultate::Facultate(const Facultate &other) :nume(other.nume), St(other.St), Pr(other.Pr), Sec(other.Sec) {}
 
-void Facultate::student_leaves(const Student &s) {
+void Facultate::student_leaves(const std::shared_ptr<Student>& s) {
     for(int i = 0; i < this -> St.size(); i++) {
         if(this -> St[i] == s) {
             for(int j = i; j < this -> St.size() - 1; j++)
@@ -29,15 +24,15 @@ void Facultate::student_leaves(const Student &s) {
     this -> St.pop_back();
 }
 
-void Facultate::student_nou(const Student &s) {
+void Facultate::student_nou(const std::shared_ptr<Student>& s) {
     this -> St.push_back(s);
 }
 
-std::vector<Student> Facultate::get_studenti() {
+std::vector<std::shared_ptr<Student>> Facultate::get_studenti() {
     return St;
 }
 
-int Facultate::find_student(const Student &s) {
+int Facultate::find_student(const std::shared_ptr<Student>& s) {
     int ans = 0;
     for(int i = 0; i < this -> St.size(); i++)
         if(this -> St[i] == s) {
@@ -47,9 +42,9 @@ int Facultate::find_student(const Student &s) {
     return ans;
 }
 
-void Facultate::update_student(const Student &s1, const Student &s2) {
-    int x = Facultate::find_student(s1);
-    this -> St[x] = s2;
+void Facultate::update_student(const Student &s1, std::shared_ptr<Student> s2) {
+    int x = Facultate::find_student((const std::shared_ptr<Student> &) s1);
+    this -> St[x] = std::move(s2);
 }
 
 int Facultate::find_prof(const Profesor &pr) {
@@ -78,19 +73,19 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
     os << "Studenti:\n";
     for(const auto & i : f.St)
     {
-        os << i.get_nume() << ' ';
-        os << i.get_grupa() << ' ';
-        os << i.get_medie() << ' ';
+        os << i->get_nume() << ' ';
+        os << i->get_grupa() << ' ';
+        os << i->get_medie() << ' ';
         os << '\n';
     }
     os << '\n';
     os << '\n';
     os << "Profesori:\n";
-    for(const auto & i : f.Pr)
+    for(const auto & prof : f.Pr)
     {
-        os << i.get_nume() << ' ';
-        for(int j : i.get_grupe())
-            os << j << ' ';
+        os << prof.get_nume() << ' ';
+        for(int grupa : prof.get_grupe())
+            os << grupa << ' ';
         os << '\n';
     }
     os << '\n';

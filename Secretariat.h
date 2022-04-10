@@ -17,6 +17,7 @@ public:
     [[nodiscard]] std::string get_secretar_sef() const;
     ~Secretariat() = default;
     void vin_secretari(int nr_noi);
+    void schimb_secretar_sef(std::string nume);
 
     Secretariat &operator=(const Secretariat &other) = default;
 

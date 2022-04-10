@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Secretariat.h"
 #include <algorithm>
+#include <utility>
 
 Secretariat::Secretariat(int numar_angajati, std::string secretar_sef)
         :numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
@@ -27,8 +28,14 @@ void Secretariat::vin_secretari(int nr_noi) {
     this -> numar_angajati += nr_noi;
 }
 
+
+
 std::ostream &operator<<(std::ostream &os, const Secretariat &sec) {
     os << sec.numar_angajati << ' ';
     os << sec.secretar_sef << ' ';
     return os;
+}
+
+void Secretariat::schimb_secretar_sef(std::string nume) {
+    this -> secretar_sef = std::move(nume);
 }
