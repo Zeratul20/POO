@@ -8,6 +8,8 @@
 
 #include <string>
 #include <utility>
+#include <vector>
+#include <algorithm>
 
 class Profesor {
     std::string nume;
