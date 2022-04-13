@@ -48,6 +48,7 @@ public:
         this -> St[0] = std::make_shared<Student_bursant>(this -> St[0]);
     }
 
+
     std::shared_ptr<Student> first_student() {
         return this -> St[0];
     }

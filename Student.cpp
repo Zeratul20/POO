@@ -34,10 +34,6 @@ std::ostream &operator<<(std::ostream &os, const Student &st) {
     return os;
 }
 
-void Student::transfer_grupa(int grupa_noua) {
-    this -> grupa = grupa_noua;
-}
-
 void Student::schimbare_grupe_2_studenti(const std::shared_ptr<Student>& s2) {
     std::swap(this -> grupa, s2->grupa);
 }
@@ -46,6 +42,10 @@ bool operator==(const std::shared_ptr<Student>& st1, const std::shared_ptr<Stude
     if(st1 -> nume == st2 -> nume and st1 -> grupa == st2 -> grupa and st1 -> medie == st2 -> medie)
         return true;
     return false;
+}
+
+void Student::transfer_grupa(int grupa_noua) {
+    this -> grupa = grupa_noua;
 }
 
 
@@ -84,6 +84,10 @@ int Student_bursant::get_bursa() const {
 
 Student Student_bursant::get_student() {
     return *s;
+}
+
+void Student_bursant::transfer_grupa(int grupa_nouaa) {
+    this -> grupa = grupa_nouaa;
 }
 
 ///STUDENT NEBURSANT

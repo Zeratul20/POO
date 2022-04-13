@@ -29,7 +29,7 @@ public:
     friend std::ostream &operator<<(std::ostream &os, const Student &st);
 
 
-    void transfer_grupa(int grupa_noua);
+    virtual void transfer_grupa(int grupa_noua);
 
     void schimbare_grupe_2_studenti(const std::shared_ptr<Student>& s2);
     friend bool operator==(const std::shared_ptr<Student>& st1, const std::shared_ptr<Student>& st2);
@@ -51,6 +51,7 @@ public:
     explicit Student_bursant(std::shared_ptr<Student> s);
 
     explicit Student_bursant(std::shared_ptr<Student_bursant> &other);
+    void transfer_grupa(int grupa_nouaa) override;
 
     void modificare_bursa(int val);
 

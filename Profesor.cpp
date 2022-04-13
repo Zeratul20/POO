@@ -57,3 +57,13 @@ std::ostream &operator<<(std::ostream &os, const Profesor &pr) {
     }
     return os;
 }
+
+std::ostream &operator<<(std::ostream &os, const Laborant &lab) {
+    os << lab.nume << '\n';
+    for(int i : lab.grupe) {
+        os << i << ' ';
+    }
+    os << '\n';
+    os << lab.materie << '\n';
+    return os;
+}

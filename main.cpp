@@ -82,11 +82,21 @@ int main() {
     //std::cout << st1_up->debug();
     //st1_up->transfer_grupa(152);
     std::cout << st1_up->get_medie() << '\n';
+    std::cout << *st1 << '\n';
     //std::cout << st1;
     st1 = fac2.first_student();
+    st1 = std::make_shared<Student_bursant>(st1);
     std::cout << *st1 << '\n';
     fac2.make_student_bursant();
-    std::cout << *st1 << '\n';
+    //std::shared_ptr<Student_bursant>st1;
+    st1->transfer_grupa(131);
+    std::cout << st1->get_grupa() << '\n';
     //st1 = std::make_shared<Student_bursant>(st1);
+    std::cout << "\n\nPARTEA CU PROFI\n\n";
+    std::cout << pr << '\n';
+    Laborant lab{"Adi", {130, 151, 150, 134}};
+    std::cout << lab << '\n';
+    lab.prof_add_group2();
+    std::cout << lab;
     return 0;
 }
