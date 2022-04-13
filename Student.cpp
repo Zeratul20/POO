@@ -82,12 +82,13 @@ int Student_bursant::get_bursa() const {
     return bursa;
 }
 
-Student Student_bursant::get_student() {
-    return *s;
-}
+/*std::shared_ptr<Student> Student_bursant::get_student() {
+    return s;
+}*/
 
 void Student_bursant::transfer_grupa(int grupa_nouaa) {
     this -> grupa = grupa_nouaa;
+    std::cout << "\nAJUNG IN DER STUDENT TRANSFER\n";
 }
 
 ///STUDENT NEBURSANT

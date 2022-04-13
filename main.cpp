@@ -15,8 +15,7 @@ int main() {
     std::shared_ptr<Student> st2;
     st2 = std::make_shared<Student>(st5);
     st5 = {"Georgescu", 143, 8};
-    std::shared_ptr<Student> st3 = st1;
-    st3 = std::make_shared<Student>(st5);
+    std::shared_ptr<Student> st3 = std::make_shared<Student>(st5);
     Student oldst1;
     Student oldst2;
     Student oldst3;
@@ -24,6 +23,7 @@ int main() {
     Profesor pr{"Paun", {131, 152, 143, 141, 151}}, pr2{"Anca", {131, 142, 141, 134, 152}};
     Profesor oldpr, oldpr2;
     Facultate fac2{"FMI", {st1, st2, st3}, {pr, pr2}, sc};
+    Facultate fac3{"ASE", {st1, st2, st3}, {pr, pr2}, sc};
     std::cout << *st1 <<'\n';
     Secretariat sec{10, "Alina"};
     std::cout << "FMI\n";
@@ -88,6 +88,11 @@ int main() {
     st1 = std::make_shared<Student_bursant>(st1);
     std::cout << *st1 << '\n';
     fac2.make_student_bursant();
+    Student_bursant stb1{st1, 700};
+    std::cout << "BURSA INAINTE\n" << stb1.get_bursa() << '\n';
+    stb1.modificare_bursa(100);
+    std::cout << "BURSA DUPA\n" << stb1.get_bursa() << '\n';
+    //std::cout << "STUDENTUL\n" << *stb1.get_student() << '\n';
     //std::shared_ptr<Student_bursant>st1;
     st1->transfer_grupa(131);
     std::cout << st1->get_grupa() << '\n';
@@ -95,8 +100,15 @@ int main() {
     std::cout << "\n\nPARTEA CU PROFI\n\n";
     std::cout << pr << '\n';
     Laborant lab{"Adi", {130, 151, 150, 134}};
+    Laborant lab2{"Ana", {131, 132, 142}, "POO"};
     std::cout << lab << '\n';
     lab.prof_add_group2();
-    std::cout << lab;
+    std::cout << lab << '\n';
+    std::cout << "MATERIE INAINTE\n" << lab2.get_materie() << '\n';
+    lab2.schimbare_materie("LFA");
+    std::cout << "MATERIE DUPA\n" <<lab2.get_materie() << '\n';
+    std::cout << lab << '\n';
+    pr.prof_add_group();
+    std::cout << pr << '\n';
     return 0;
 }

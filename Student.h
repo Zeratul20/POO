@@ -57,7 +57,7 @@ public:
 
     [[nodiscard]] int get_grupa();
     [[nodiscard]] int get_bursa() const;
-    Student get_student();
+    //std::shared_ptr<Student> get_student();
 
     Student_bursant() = default;
 

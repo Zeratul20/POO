@@ -7,6 +7,7 @@
 
 
 #include <string>
+#include <utility>
 
 class Profesor {
     std::string nume;
@@ -33,7 +34,7 @@ public:
         std::sort(this -> grupe.begin(), this -> grupe.end());
     }
 
-    void prof_add_group2() {
+    virtual void prof_add_group2() {
         this -> grupe.push_back(170);
         std::sort(this -> grupe.begin(), this -> grupe.end());
     }
@@ -48,9 +49,9 @@ class Laborant:public Profesor {
     std::vector<int>grupe;
     std::string materie;
 public:
-    Laborant(std::string nume, std::vector<int>grupe, std::string materie):nume(nume), grupe(grupe), materie(materie) {}
-    Laborant(std::string nume, std::vector<int>grupe):nume(nume), grupe(grupe) {}
-    Laborant(const Laborant &other) {
+    Laborant(std::string nume, std::vector<int>grupe, std::string materie):nume(std::move(nume)), grupe(std::move(grupe)), materie(std::move(materie)) {}
+    Laborant(std::string nume, std::vector<int>grupe):nume(std::move(nume)), grupe(std::move(grupe)) {}
+    Laborant(const Laborant &other)  : Profesor(other) {
         this -> nume = other.nume;
         this -> grupe = other.grupe;
         this -> materie = other.materie;
@@ -61,13 +62,13 @@ public:
     }
 
     void schimbare_materie(std::string materie_noua) {
-        this -> materie = materie_noua;
+        this -> materie = std::move(materie_noua);
     }
-    void prof_add_group() {
+    void prof_add_group() override {
         this -> grupe.push_back(161);
         std::sort(this -> grupe.begin(), this -> grupe.end());
     }
-    void prof_add_group2() {
+    void prof_add_group2() override {
         this -> grupe.push_back(171);
         std::sort(this -> grupe.begin(), this -> grupe.end());
     }
