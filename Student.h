@@ -33,12 +33,7 @@ public:
 
     void schimbare_grupe_2_studenti(const std::shared_ptr<Student>& s2);
     friend bool operator==(const std::shared_ptr<Student>& st1, const std::shared_ptr<Student>& st2);
-    Student &operator=(std::shared_ptr<Student> &other) {
-        nume = other -> nume;
-        grupa = other -> grupa;
-        medie = other -> medie;
-        return *this;
-    }
+    Student &operator=(std::shared_ptr<Student> const &other);
 
 };
 

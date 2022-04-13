@@ -48,6 +48,13 @@ void Student::transfer_grupa(int grupa_noua) {
     this -> grupa = grupa_noua;
 }
 
+Student &Student::operator=(const std::shared_ptr<Student> &other) {
+    nume = other -> nume;
+    grupa = other -> grupa;
+    medie = other -> medie;
+    return *this;
+}
+
 
 ///STUDENT BURSANT
 
