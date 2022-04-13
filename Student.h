@@ -18,9 +18,9 @@ protected:
     double medie{};
 public:
     Student(std::string nume, int grupa, double medie);
-    explicit Student(std::shared_ptr<Student> &other);
+    explicit Student(std::shared_ptr<Student> const &other);
     Student() = default;
-    ~Student() = default;
+    virtual ~Student() = default;
     [[nodiscard]] std::string get_nume() const;
 
     [[nodiscard]] int get_grupa() const;
@@ -50,7 +50,7 @@ public:
 
     explicit Student_bursant(std::shared_ptr<Student> s);
 
-    explicit Student_bursant(std::shared_ptr<Student_bursant> &other);
+    explicit Student_bursant(std::shared_ptr<Student_bursant> const &other);
     void transfer_grupa(int grupa_nouaa) override;
 
     void modificare_bursa(int val);
@@ -60,7 +60,7 @@ public:
     //std::shared_ptr<Student> get_student();
 
     Student_bursant() = default;
-
+    ~Student_bursant() override = default;
     friend std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b);
 
 };
@@ -70,9 +70,9 @@ class Student_nebursant: public Student {
 public:
     explicit Student_nebursant(std::shared_ptr<Student> s);
 
-    explicit Student_nebursant(std::shared_ptr<Student_nebursant> &other);
-
+    explicit Student_nebursant(std::shared_ptr<Student_nebursant> const &other);
     Student_nebursant() = default;
+    ~Student_nebursant() override = default;
 };
 
 #endif //MAIN_CPP_STUDENT_H

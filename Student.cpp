@@ -7,7 +7,7 @@
 
 Student::Student(std::string nume, int grupa, double medie) :nume{std::move(nume)}, grupa{grupa}, medie{medie} {}
 
-Student::Student(std::shared_ptr<Student> &other) : nume(other->nume), grupa(other->grupa), medie(other->medie) {
+Student::Student(std::shared_ptr<Student> const &other) : nume(other->nume), grupa(other->grupa), medie(other->medie) {
     /*this -> nume = other->nume;
     this -> grupa = other->grupa;
     this -> medie = other->medie;*/
@@ -61,7 +61,7 @@ std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b) {
     return os;
 }
 
-Student_bursant::Student_bursant(std::shared_ptr<Student_bursant> &other) : s(other -> s), bursa(other -> bursa) {
+Student_bursant::Student_bursant(std::shared_ptr<Student_bursant> const &other) : s(other -> s), bursa(other -> bursa) {
     /*this -> s = other.s;
     this -> bursa = other.bursa;*/
 }
@@ -95,4 +95,4 @@ void Student_bursant::transfer_grupa(int grupa_nouaa) {
 
 Student_nebursant::Student_nebursant(std::shared_ptr<Student> s) : s(std::move(s)){}
 
-Student_nebursant::Student_nebursant(std::shared_ptr<Student_nebursant> &other) : s(other -> s) {}
+Student_nebursant::Student_nebursant(std::shared_ptr<Student_nebursant> const &other) : s(other -> s) {}

@@ -21,7 +21,7 @@ public:
 
     explicit Profesor(std::string nume);
 
-    ~Profesor() = default;
+    virtual ~Profesor() = default;
     [[nodiscard]] std::string get_nume() const;
     [[nodiscard]] std::vector<int> get_grupe() const;
 
@@ -75,6 +75,7 @@ public:
         std::sort(this -> grupe.begin(), this -> grupe.end());
     }
     friend std::ostream &operator<<(std::ostream &os, const Laborant &lab);
+    ~Laborant() override = default;
 };
 
 
