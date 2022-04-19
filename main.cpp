@@ -98,6 +98,9 @@ int main() {
     st1->transfer_grupa(131);
     std::cout << st1->get_grupa() << '\n';
     //st1 = std::make_shared<Student_bursant>(st1);
+    std::cout << "Studenti inainte de swap\n" << *st2 << *st3 <<'\n';
+    Student::swap(st2, st3);
+    std::cout << "Studenti dupa swap\n" << *st2 << *st3 <<'\n';
     std::cout << "\n\nPARTEA CU PROFI\n\n";
     std::cout << pr << '\n';
     Laborant lab{"Adi", {130, 151, 150, 134}};

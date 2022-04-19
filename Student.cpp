@@ -55,6 +55,13 @@ Student &Student::operator=(const std::shared_ptr<Student> &other) {
     return *this;
 }
 
+void Student::swap(std::shared_ptr<Student> &st1, std::shared_ptr<Student> &st2) {
+    std::shared_ptr<Student> aux;
+    aux = st1;
+    st1 = st2;
+    st2 = aux;
+}
+
 
 ///STUDENT BURSANT
 
