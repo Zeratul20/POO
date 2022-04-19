@@ -82,6 +82,7 @@ int main() {
     //std::cout << st1_up->debug();
     //st1_up->transfer_grupa(152);
     std::cout << st1_up->get_medie() << '\n';
+    delete st1_up;
     std::cout << *st1 << '\n';
     //std::cout << st1;
     st1 = fac2.first_student();
