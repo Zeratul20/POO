@@ -106,13 +106,13 @@ int main() {
     Laborant lab{"Adi", {130, 151, 150, 134}};
     Laborant lab2{"Ana", {131, 132, 142}, "POO"};
     std::cout << lab << '\n';
-    lab.prof_add_group2();
+    lab.prof_add_group(160);
     std::cout << lab << '\n';
     std::cout << "MATERIE INAINTE\n" << lab2.get_materie() << '\n';
     lab2.schimbare_materie("LFA");
-    std::cout << "MATERIE DUPA\n" <<lab2.get_materie() << '\n';
+    std::cout << "MATERIE DUPA\n" << lab2.get_materie() << '\n';
     std::cout << lab << '\n';
-    pr.prof_add_group();
+    pr.prof_add_group(160);
     std::cout << pr << '\n';
     return 0;
 }

@@ -30,16 +30,7 @@ public:
     void sortare_grupe();
 
     void prof_leave_group(int grupa);
-    void prof_add_group(int grupa);
-    virtual void prof_add_group() {
-        this -> grupe.push_back(160);
-        std::sort(this -> grupe.begin(), this -> grupe.end());
-    }
-
-    virtual void prof_add_group2() {
-        this -> grupe.push_back(170);
-        std::sort(this -> grupe.begin(), this -> grupe.end());
-    }
+    virtual void prof_add_group(int grupa);
 
     Profesor &operator=(const Profesor &other) = default;
 
@@ -66,12 +57,8 @@ public:
     void schimbare_materie(std::string materie_noua) {
         this -> materie = std::move(materie_noua);
     }
-    void prof_add_group() override {
-        this -> grupe.push_back(161);
-        std::sort(this -> grupe.begin(), this -> grupe.end());
-    }
-    void prof_add_group2() override {
-        this -> grupe.push_back(171);
+    void prof_add_group(int grupa) override {
+        this -> grupe.push_back(grupa+1);
         std::sort(this -> grupe.begin(), this -> grupe.end());
     }
     friend std::ostream &operator<<(std::ostream &os, const Laborant &lab);
