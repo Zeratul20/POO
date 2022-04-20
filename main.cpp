@@ -20,7 +20,7 @@ int main() {
     Student oldst2;
     Student oldst3;
     Secretariat sc{10, "Alina"};
-    Profesor pr{"Paun", {131, 152, 143, 141, 151}}, pr2{"Anca", {131, 142, 141, 134, 152}};
+    Profesor pr{"Paun", {131, 152, 143, 141, 151}, 6000}, pr2{"Anca", {131, 142, 141, 134, 152}, 5000};
     Profesor oldpr, oldpr2;
     Facultate fac2{"FMI", {st1, st2, st3}, {pr, pr2}, sc};
     Facultate fac3{"ASE", {st1, st2, st3}, {pr, pr2}, sc};
@@ -103,9 +103,10 @@ int main() {
     std::cout << "Studenti dupa swap\n" << *st2 << *st3 <<'\n';
     std::cout << "\n\nPARTEA CU PROFI\n\n";
     std::cout << pr << '\n';
-    Laborant lab{"Adi", {130, 151, 150, 134}};
-    Laborant lab2{"Ana", {131, 132, 142}, "POO"};
+    Laborant lab{"Adi", {130, 151, 150, 134}, 2000};
+    Laborant lab2{"Ana", {131, 132, 142}, "POO", 1000};
     std::cout << lab << '\n';
+    std::cout << lab.get_salar() << '\n';
     lab.prof_add_group(160);
     std::cout << lab << '\n';
     std::cout << "MATERIE INAINTE\n" << lab2.get_materie() << '\n';
@@ -114,5 +115,11 @@ int main() {
     std::cout << lab << '\n';
     pr.prof_add_group(160);
     std::cout << pr << '\n';
+    std::cout << "Salariul profesorului inainte de marire\n" << pr.get_salar() << '\n';
+    pr.marire_salar(1000);
+    std::cout << "Salariul profesorului dupa marire\n" << pr.get_salar() << '\n';
+    std::cout << "Salariul laborantului inainte de marire\n" << lab.get_salar() << '\n';
+    lab.marire_salar(1000);
+    std::cout << "Salariul laborantului dupa marire\n" << lab.get_salar() << '\n';
     return 0;
 }

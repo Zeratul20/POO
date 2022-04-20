@@ -9,10 +9,11 @@
 #include <algorithm>
 
 Profesor::Profesor(std::string nume) : nume(std::move(nume)) {}
-Profesor::Profesor(std::string nume, std::vector<int> grupe) :nume{std::move(nume)}, grupe{std::move(grupe)} {}
-Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe) {
+Profesor::Profesor(std::string nume, std::vector<int> grupe, int salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
+Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe), salar(other.salar) {
     this -> nume = other.nume;
     this -> grupe = other.grupe;
+    this -> salar = other.salar;
 }
 
 std::string Profesor::get_nume() const {
@@ -65,5 +66,6 @@ std::ostream &operator<<(std::ostream &os, const Laborant &lab) {
     }
     os << '\n';
     os << lab.materie << '\n';
+    os << lab.salar << '\n';
     return os;
 }

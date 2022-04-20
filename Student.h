@@ -35,6 +35,7 @@ public:
     friend bool operator==(const std::shared_ptr<Student>& st1, const std::shared_ptr<Student>& st2);
     Student &operator=(std::shared_ptr<Student> const &other);
     static void swap(std::shared_ptr<Student> &st1, std::shared_ptr<Student> &st2);
+    //[[nodiscard]] virtual std::shared_ptr<Student> clone() const = 0;
 
 };
 
