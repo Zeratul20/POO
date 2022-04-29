@@ -7,22 +7,22 @@
 #include <memory>
 
 int main() {
-    Student st4{"Andrei", 130, 7};
-    Student st5{"Ion", 140, 8};
+    Student stt1{"Andrei", 130, 7};
+    Student stt2{"Ion", 140, 8};
     std::shared_ptr<Student> st1;
-    st1 = std::make_shared<Student>(st4);
+    st1 = std::make_shared<Student>(stt2);
     std::cout << "DEBUG\n" << *st1 << '\n';
     std::shared_ptr<Student> st2;
-    st2 = std::make_shared<Student>(st5);
-    st5 = {"Georgescu", 143, 8};
-    std::shared_ptr<Student> st3 = std::make_shared<Student>(st5);
+    st2 = std::make_shared<Student>(stt1);
+    stt1 = {"Georgescu", 143, 8};
+    std::shared_ptr<Student> st3 = std::make_shared<Student>(stt1);
     Student oldst1;
     Student oldst2;
     Student oldst3;
     Secretariat sc{10, "Alina"};
     Profesor pr{"Paun", {131, 152, 143, 141, 151}, 6000}, pr2{"Anca", {131, 142, 141, 134, 152}, 5000};
     Profesor oldpr, oldpr2;
-    Facultate fac2{"FMI", {st1, st2, st3}, {pr, pr2}, sc};
+    Facultate fac2{"POLI", {st1, st2, st3}, {pr, pr2}, sc};
     Facultate fac3{"ASE", {st1, st2, st3}, {pr, pr2}, sc};
     std::cout << *st1 <<'\n';
     Secretariat sec{10, "Alina"};
@@ -62,7 +62,7 @@ int main() {
         std::cout << pr.get_grupe()[i] << ' ';
     fac2.update_prof(oldpr, pr);
     fac2.student_leaves(st3);
-    st3 = std::make_shared<Student>(st4);
+    st3 = std::make_shared<Student>(stt2);
     std::cout << "\nAICIIIII\n";
     std::cout << *st3 <<'\n';
     fac2.student_nou(st3);
@@ -101,7 +101,25 @@ int main() {
     std::cout << "Studenti inainte de swap\n" << *st2 << *st3 <<'\n';
     Student::swap(st2, st3);
     std::cout << "Studenti dupa swap\n" << *st2 << *st3 <<'\n';
-    std::cout << "\n\nPARTEA CU PROFI\n\n";
+    Student_bursant stb2{st2, 800};
+    std::cout << stb2 << '\n';
+    stb2.set_medie();
+    std::cout << "st2 si stb2 au aceeasi medie adica 8 la inceput\n";
+    st2 -> creste_medie(0.5);
+    stb2.creste_medie(0.5);
+    std::cout << "Media lui st2 dupa marire: " << st2->get_medie() << '\n';
+    std::cout << "Media lui stb2 dupa marire: " << stb2.get_medie() << '\n';
+    std::cout << *st2 << '\n' << *st3 << '\n';
+    std::shared_ptr<Student> st4 = std::make_shared<Student>(stt1);
+    std::shared_ptr<Student> st5 = std::make_shared<Student>(stt2);
+    std::cout << *st4 << '\n';
+    Facultate fac{"FMI", {st2, st3, st4, st5}, {pr, pr2}, sc};
+    std::cout << fac << '\n';
+    const std::shared_ptr<Student>& oldst5 = st5;
+    st5->transfer_grupa(141);
+    fac.update_student(oldst5, st5);
+    std::cout << fac << '\n';
+    /*std::cout << "\n\nPARTEA CU PROFI\n\n";
     std::cout << pr << '\n';
     Laborant lab{"Adi", {130, 151, 150, 134}, 2000};
     Laborant lab2{"Ana", {131, 132, 142}, "POO", 1000};
@@ -121,5 +139,6 @@ int main() {
     std::cout << "Salariul laborantului inainte de marire\n" << lab.get_salar() << '\n';
     lab.marire_salar(1000);
     std::cout << "Salariul laborantului dupa marire\n" << lab.get_salar() << '\n';
+    std::cout << stb2.get_medie();*/
     return 0;
 }

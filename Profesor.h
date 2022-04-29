@@ -26,13 +26,9 @@ public:
     [[nodiscard]] std::string get_nume() const;
     [[nodiscard]] std::vector<int> get_grupe() const;
 
-    [[nodiscard]] virtual int get_salar() const {
-        return salar;
-    }
+    [[nodiscard]] virtual int get_salar() const;
 
-    virtual void marire_salar(int bonus) {
-        salar += bonus;
-    }
+    virtual void marire_salar(int bonus);
 
     bool operator==(const Profesor &other);
 
@@ -52,34 +48,17 @@ class Laborant:public Profesor {
     std::string materie;
     int salar{};
 public:
-    Laborant(std::string nume, std::vector<int>grupe, std::string materie, int salar):nume(std::move(nume)), grupe(std::move(grupe)), materie(std::move(materie)), salar(salar) {}
-    Laborant(std::string nume, std::vector<int>grupe, int salar):nume(std::move(nume)), grupe(std::move(grupe)), salar(salar) {}
-    Laborant(const Laborant &other)  : Profesor(other) {
-        this -> nume = other.nume;
-        this -> grupe = other.grupe;
-        this -> materie = other.materie;
-        this -> salar = other.salar;
-    }
+    Laborant(std::string nume, std::vector<int>grupe, std::string materie, int salar);
+    Laborant(std::string nume, std::vector<int>grupe, int salar);
+    Laborant(const Laborant &other);
 
-    std::string get_materie() {
-        return materie;
-    }
-    [[nodiscard]] int get_salar() const override {
-        return salar;
-    }
+    std::string get_materie();
+    [[nodiscard]] int get_salar() const override;
 
-    void marire_salar(int bonus) override {
-        //Laborantul primeste doar 10% din acea marire.
-        salar += bonus/10;
-    }
+    void marire_salar(int bonus) override;
 
-    void schimbare_materie(std::string materie_noua) {
-        this -> materie = std::move(materie_noua);
-    }
-    void prof_add_group(int grupa) override {
-        this -> grupe.push_back(grupa+1);
-        std::sort(this -> grupe.begin(), this -> grupe.end());
-    }
+    void schimbare_materie(std::string materie_noua);
+    void prof_add_group(int grupa) override;
     friend std::ostream &operator<<(std::ostream &os, const Laborant &lab);
     ~Laborant() override = default;
 };

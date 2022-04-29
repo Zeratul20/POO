@@ -62,6 +62,10 @@ void Student::swap(std::shared_ptr<Student> &st1, std::shared_ptr<Student> &st2)
     st2 = aux;
 }
 
+void Student::creste_medie(double marire) {
+    medie += marire;
+}
+
 
 ///STUDENT BURSANT
 
@@ -70,7 +74,7 @@ Student_bursant::Student_bursant(std::shared_ptr<Student> s, int bursa) : s(std:
 Student_bursant::Student_bursant(std::shared_ptr<Student> s) : s(std::move(s)) {}
 
 std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b) {
-    os << st_b.s;
+    os << *st_b.s;
     os << st_b.bursa;
     return os;
 }
@@ -100,9 +104,22 @@ int Student_bursant::get_bursa() const {
     return s;
 }*/
 
-void Student_bursant::transfer_grupa(int grupa_nouaa) {
-    this -> grupa = grupa_nouaa;
+void Student_bursant::transfer_grupa(int grupa_noua) {
+    this -> grupa = grupa_noua;
     std::cout << "\nAJUNG IN DER STUDENT TRANSFER\n";
+}
+
+void Student_bursant::set_medie() {
+    medie = s -> get_medie();
+}
+
+double Student_bursant::get_medie() {
+    return medie;
+}
+
+void Student_bursant::creste_medie(double marire) {
+    ///Studentul bursant are o marire de 1.5 ori mare mare decat studentul normal.
+    this -> medie += 1.5 * marire;
 }
 
 ///STUDENT NEBURSANT
