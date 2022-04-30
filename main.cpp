@@ -119,10 +119,13 @@ int main() {
     st5->transfer_grupa(141);
     fac.update_student(oldst5, st5);
     std::cout << fac << '\n';
-    /*std::cout << "\n\nPARTEA CU PROFI\n\n";
+    std::cout << "\n\nPARTEA CU PROFI\n\n";
     std::cout << pr << '\n';
     Laborant lab{"Adi", {130, 151, 150, 134}, 2000};
     Laborant lab2{"Ana", {131, 132, 142}, "POO", 1000};
+    Laborant lab3 = lab2;
+    lab3.sortare_grupe();
+    std::cout << lab3 << '\n';
     std::cout << lab << '\n';
     std::cout << lab.get_salar() << '\n';
     lab.prof_add_group(160);
@@ -139,6 +142,6 @@ int main() {
     std::cout << "Salariul laborantului inainte de marire\n" << lab.get_salar() << '\n';
     lab.marire_salar(1000);
     std::cout << "Salariul laborantului dupa marire\n" << lab.get_salar() << '\n';
-    std::cout << stb2.get_medie();*/
+    std::cout << stb2.get_medie();
     return 0;
 }
