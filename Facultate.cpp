@@ -91,3 +91,16 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
     os << f.Sec.get_numar_angajati() << ' ' << f.Sec.get_secretar_sef() << '\n';
     return os;
 }
+
+void Facultate::update_student(const std::shared_ptr<Student> &s1, std::shared_ptr<Student> s2) {
+    int x = Facultate::find_student(s1);
+    this -> St[x] = std::move(s2);
+}
+
+void Facultate::make_student_bursant() {
+    this -> St[0] = std::make_shared<Student_bursant>(this -> St[0]);
+}
+
+std::shared_ptr<Student> Facultate::first_student() {
+    return this -> St[0];
+}

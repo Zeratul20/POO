@@ -23,9 +23,7 @@ public:
     ~Secretariat() = default;
     void vin_secretari(int nr_noi);
     void schimb_secretar_sef(std::string nume);
-    static void g(Secretariat &sec) {
-        sec.numar_angajati++;
-    }
+    static void g(Secretariat &sec);
 
     Secretariat &operator=(const Secretariat &other) = default;
 
@@ -37,20 +35,10 @@ class Diviziuni_Secretariat:public Secretariat {
     std::string secretar_sef;
     int an;
 public:
-    [[nodiscard]] std::shared_ptr<Secretariat> clone() const  {
-        std::cout << "\nAm intrat in clone\n";
-        return std::make_shared<Diviziuni_Secretariat>(*this);
-    }
+    [[nodiscard]] std::shared_ptr<Secretariat> clone() const;
     Diviziuni_Secretariat(int numar_angajati, std::string secretar_sef, int an): numar_angajati(numar_angajati), secretar_sef(std::move(secretar_sef)), an(an) {}
-    Diviziuni_Secretariat( const Diviziuni_Secretariat &other)  : Secretariat(other) {
-        this -> numar_angajati = other.numar_angajati;
-        this -> secretar_sef = other.secretar_sef;
-        this -> an = other.an;
-    }
-    [[nodiscard]] int get_numar_angajati() const override {
-        std::cout << "\nGetter din derivata\n";
-        return numar_angajati;
-    }
+    Diviziuni_Secretariat( const Diviziuni_Secretariat &other);
+    [[nodiscard]] int get_numar_angajati() const override;
 
 };
 

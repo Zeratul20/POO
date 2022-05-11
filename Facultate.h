@@ -33,10 +33,7 @@ public:
 
     void update_student(const Student& s1, std::shared_ptr<Student> s2);
 
-    void update_student(const std::shared_ptr<Student>& s1, std::shared_ptr<Student> s2) {
-        int x = Facultate::find_student(s1);
-        this -> St[x] = std::move(s2);
-    }
+    void update_student(const std::shared_ptr<Student>& s1, std::shared_ptr<Student> s2);
 
     int find_prof(const Profesor& pr);
 
@@ -44,19 +41,10 @@ public:
 
     void update_secretariat(const Secretariat& sec);
 
-    /*void ceva() {
-        for(auto &st: this -> St) {
-            st = std::make_shared<Student_nebursant>(st);
-        }
-    }*/
-    void make_student_bursant() {
-        this -> St[0] = std::make_shared<Student_bursant>(this -> St[0]);
-    }
+    void make_student_bursant();
 
 
-    std::shared_ptr<Student> first_student() {
-        return this -> St[0];
-    }
+    std::shared_ptr<Student> first_student();
 
     friend std::ostream &operator<<(std::ostream &os, const Facultate &f);
 };

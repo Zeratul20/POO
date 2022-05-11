@@ -121,3 +121,7 @@ void Student_bursant::creste_medie(double marire) {
     ///Studentul bursant are o marire de 1.5 ori mare mare decat studentul normal.
     this -> medie += 1.5 * marire;
 }
+
+void Student_bursant::f() {
+    std::cout << "f Student bursant\n";
+}

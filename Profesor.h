@@ -51,7 +51,6 @@ class Laborant:public Profesor {
 public:
     Laborant(std::string nume, std::vector<int>grupe, std::string materie, int salar);
     Laborant(std::string nume, std::vector<int>grupe, int salar);
-    Laborant(const Laborant &other);
 
     std::string get_materie();
     [[nodiscard]] int get_salar() const override;
@@ -62,25 +61,7 @@ public:
     void prof_add_group(int grupa) override;
     friend std::ostream &operator<<(std::ostream &os, const Laborant &lab);
     ~Laborant() override = default;
-    Laborant(Laborant &other)  : Profesor(other) {
-        std::cout << "\nA intrat in copy and swap constructor!" << '\n';
-        std::swap(this -> nume, other.nume);
-        std::vector<int>aux;
-        aux.clear();
-        for(auto grupa:this -> grupe) {
-            aux.push_back(grupa);
-        }
-        this -> grupe.clear();
-        for(auto grupa:other.grupe) {
-            this -> grupe.push_back(grupa);
-        }
-        other.grupe.clear();
-        for(auto grupa:aux) {
-            other.grupe.push_back(grupa);
-        }
-        std::swap(this -> materie, other.materie);
-        std::swap(this -> salar, other.salar);
-    }
+    Laborant(Laborant &other);
 };
 
 

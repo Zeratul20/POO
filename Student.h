@@ -66,9 +66,7 @@ public:
     ~Student_bursant() override = default;
     friend std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b);
 
-    static void f() {
-        std::cout << "f Student bursant\n";
-    }
+    static void f();
 
 };
 

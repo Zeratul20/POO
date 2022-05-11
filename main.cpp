@@ -152,6 +152,9 @@ int main() {
     std::cout << sec.get_numar_angajati();
     copie -> g(sec);
     std::cout << sec.get_numar_angajati();
+    std::cout <<'\n';
+
+    std::cout << "\n\nPARTEA CU EXCEPTII\n\n";
     Student *st2_up = new Student_bursant;
     try {
         auto &der = dynamic_cast<Student_bursant&>(*st2_up);
