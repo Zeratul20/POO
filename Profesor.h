@@ -10,6 +10,7 @@
 #include <utility>
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 class Profesor {
     std::string nume;
@@ -61,6 +62,25 @@ public:
     void prof_add_group(int grupa) override;
     friend std::ostream &operator<<(std::ostream &os, const Laborant &lab);
     ~Laborant() override = default;
+    Laborant(Laborant &other)  : Profesor(other) {
+        std::cout << "\nA intrat in copy and swap constructor!" << '\n';
+        std::swap(this -> nume, other.nume);
+        std::vector<int>aux;
+        aux.clear();
+        for(auto grupa:this -> grupe) {
+            aux.push_back(grupa);
+        }
+        this -> grupe.clear();
+        for(auto grupa:other.grupe) {
+            this -> grupe.push_back(grupa);
+        }
+        other.grupe.clear();
+        for(auto grupa:aux) {
+            other.grupe.push_back(grupa);
+        }
+        std::swap(this -> materie, other.materie);
+        std::swap(this -> salar, other.salar);
+    }
 };
 
 

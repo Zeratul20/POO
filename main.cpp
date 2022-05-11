@@ -5,7 +5,6 @@
 #include "Secretariat.h"
 #include "Facultate.h"
 #include <memory>
-
 int main() {
     Student stt1{"Andrei", 130, 7};
     Student stt2{"Ion", 140, 8};
@@ -78,7 +77,7 @@ int main() {
         std::cout << *fac2.get_studenti()[i] << ' ';
     Student_bursant stb{st1, 700};
     std::cout << stb.get_grupa() << '\n';
-    Student *st1_up = new Student_bursant();
+    Student *st1_up = new Student_bursant;
     //std::cout << st1_up->debug();
     //st1_up->transfer_grupa(152);
     std::cout << st1_up->get_medie() << '\n';
@@ -143,5 +142,23 @@ int main() {
     lab.marire_salar(1000);
     std::cout << "Salariul laborantului dupa marire\n" << lab.get_salar() << '\n';
     std::cout << stb2.get_medie();
+    Laborant lab4{"Alin", {131, 130, 142, 140}, "SD", 1500};
+    Laborant lab5{"Ioana", {132, 130, 141, 150}, "LCM", 1700};
+    Laborant lab6(lab4);
+    std::cout << lab6 << '\n';
+    std::cout << "\n\nPARTEA CU SECRETARIAT\n\n";
+    Diviziuni_Secretariat divsec{7, "Mara", 1};
+    auto copie = divsec.clone();
+    std::cout << sec.get_numar_angajati();
+    copie -> g(sec);
+    std::cout << sec.get_numar_angajati();
+    Student *st2_up = new Student_bursant;
+    try {
+        auto &der = dynamic_cast<Student_bursant&>(*st2_up);
+        der.f();
+    } catch(std::bad_cast &err) {
+        std::cout << err.what() << '\n';
+    }
+    delete st2_up;
     return 0;
 }

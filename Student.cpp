@@ -122,8 +122,7 @@ void Student_bursant::creste_medie(double marire) {
     this -> medie += 1.5 * marire;
 }
 
-///STUDENT NEBURSANT
-
-Student_nebursant::Student_nebursant(std::shared_ptr<Student> s) : s(std::move(s)){}
-
-Student_nebursant::Student_nebursant(std::shared_ptr<Student_nebursant> const &other) : s(other -> s) {}
+Student_bursant &Student_bursant::operator=(std::_Bit_reference &other) {
+    std::swap(reinterpret_cast<bool &>(*this), other);
+    return *this;
+}

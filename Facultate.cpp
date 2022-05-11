@@ -71,11 +71,11 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
     os << "Nume facultate: " << f.nume << '\n';
     os << '\n';
     os << "Studenti:\n";
-    for(const auto & i : f.St)
+    for(const auto & fac : f.St)
     {
-        os << i->get_nume() << ' ';
-        os << i->get_grupa() << ' ';
-        os << i->get_medie() << ' ';
+        os << fac->get_nume() << ' ';
+        os << fac->get_grupa() << ' ';
+        os << fac->get_medie() << ' ';
         os << '\n';
     }
     os << '\n';

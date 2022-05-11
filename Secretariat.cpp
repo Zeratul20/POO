@@ -17,6 +17,7 @@ Secretariat::Secretariat(const Secretariat &other)
 }
 
 int Secretariat::get_numar_angajati() const {
+    std::cout << "\nGetter din baza\n";
     return numar_angajati;
 }
 

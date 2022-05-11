@@ -10,6 +10,7 @@
 #include <iostream>
 #include <memory>
 #include <utility>
+#include <algorithm>
 
 class Student {
 protected:
@@ -61,17 +62,19 @@ public:
     Student_bursant() = default;
     ~Student_bursant() override = default;
     friend std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b);
+    Student_bursant &operator=(std::_Bit_reference &other);
+    void f() {
+        std::cout << "f Student bursant\n";
+    }
 
 };
 
-class Student_nebursant: public Student {
-    std::shared_ptr<Student> s;
+class eroare_student:public std::runtime_error {
 public:
-    explicit Student_nebursant(std::shared_ptr<Student> s);
-
-    explicit Student_nebursant(std::shared_ptr<Student_nebursant> const &other);
-    Student_nebursant() = default;
-    ~Student_nebursant() override = default;
+    explicit eroare_student(const std::string &arg): runtime_error(arg) {
+        std::cout << "constr err\n";
+    }
 };
+
 
 #endif //MAIN_CPP_STUDENT_H
