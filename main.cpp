@@ -155,10 +155,20 @@ int main() {
     Student *st2_up = new Student_bursant;
     try {
         auto &der = dynamic_cast<Student_bursant&>(*st2_up);
-        der.f();
+        Student_bursant::f();
     } catch(std::bad_cast &err) {
         std::cout << err.what() << '\n';
     }
     delete st2_up;
+    std::cout << st3 -> get_medie() << '\n';
+    Student::set_medie(st3, 3);
+    try {
+        if(st3 -> get_medie() > 10 || st3 -> get_medie() < 1)
+            throw eroare_facultate("eroare facultate");
+        else if(st3 -> get_medie() < 5)
+            throw eroare_student("eroare student");
+    } catch (my_exceptie &err) {
+        std::cout << "catch logic err\n" << err.what();
+    }
     return 0;
 }

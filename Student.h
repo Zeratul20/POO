@@ -32,6 +32,9 @@ public:
     virtual void creste_medie(double marire);
 
     virtual void transfer_grupa(int grupa_noua);
+    static void set_medie(const std::shared_ptr<Student> &st, double medie) {
+        st -> medie = medie;
+    }
 
     void schimbare_grupe_2_studenti(const std::shared_ptr<Student>& s2);
     friend bool operator==(const std::shared_ptr<Student>& st1, const std::shared_ptr<Student>& st2);
@@ -62,17 +65,31 @@ public:
     Student_bursant() = default;
     ~Student_bursant() override = default;
     friend std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b);
-    Student_bursant &operator=(std::_Bit_reference &other);
-    void f() {
+
+    static void f() {
         std::cout << "f Student bursant\n";
     }
 
 };
 
-class eroare_student:public std::runtime_error {
+class my_exceptie:public std::runtime_error {
 public:
-    explicit eroare_student(const std::string &arg): runtime_error(arg) {
-        std::cout << "constr err\n";
+    explicit my_exceptie(const std::string &arg): runtime_error(arg) {
+        std::cout << "my_exceptie err\n";
+    }
+};
+
+class eroare_student:public my_exceptie {
+public:
+    explicit eroare_student(const std::string &arg): my_exceptie(arg) {
+        std::cout << "student err\n";
+    }
+};
+
+class eroare_facultate:public my_exceptie {
+public:
+    explicit eroare_facultate(const std::string &arg): my_exceptie(arg) {
+        std::cout << "facultate err\n";
     }
 };
 

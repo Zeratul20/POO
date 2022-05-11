@@ -78,13 +78,6 @@ std::ostream &operator<<(std::ostream &os, const Laborant &lab) {
     return os;
 }
 
-Laborant::Laborant(const Laborant &other) : Profesor(other) {
-    this -> nume = other.nume;
-    this -> grupe = other.grupe;
-    this -> materie = other.materie;
-    this -> salar = other.salar;
-}
-
 std::string Laborant::get_materie() {
     return materie;
 }

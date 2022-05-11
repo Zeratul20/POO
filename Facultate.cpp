@@ -11,8 +11,6 @@ Facultate::Facultate(std::string nume, std::vector<std::shared_ptr<Student>> St,
         :nume{std::move(nume)}, St{std::move(St)}, Pr{std::move(Pr)}, Sec(Sec) {
 }
 
-Facultate::Facultate(const Facultate &other) = default;
-
 void Facultate::student_leaves(const std::shared_ptr<Student>& s) {
     for(int i = 0; i < this -> St.size(); i++) {
         if(this -> St[i] == s) {
