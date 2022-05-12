@@ -19,7 +19,7 @@ class Facultate {
     Secretariat Sec;
 public:
     Facultate(std::string nume, std::vector<std::shared_ptr<Student>>St, std::vector<Profesor>Pr, const Secretariat& Sec);
-    Facultate(const Facultate &other);
+    Facultate(const Facultate &other) = default;
     Facultate &operator=(const Facultate &other) = default;
     ~Facultate() = default;
 

@@ -41,7 +41,7 @@ int Facultate::find_student(const std::shared_ptr<Student>& s) {
 }
 
 void Facultate::update_student(const Student &s1, std::shared_ptr<Student> s2) {
-    int x = Facultate::find_student((const std::shared_ptr<Student> &) s1);
+    int x = find_student((const std::shared_ptr<Student> &) s1);
     this -> St[x] = std::move(s2);
 }
 
@@ -57,7 +57,7 @@ int Facultate::find_prof(const Profesor &pr) {
 }
 
 void Facultate::update_prof(const Profesor &pr1, const Profesor &pr2) {
-    int x = Facultate::find_prof(pr1);
+    int x = find_prof(pr1);
     this -> Pr[x] = pr2;
 }
 
@@ -93,7 +93,7 @@ std::ostream &operator<<(std::ostream &os, const Facultate &f) {
 }
 
 void Facultate::update_student(const std::shared_ptr<Student> &s1, std::shared_ptr<Student> s2) {
-    int x = Facultate::find_student(s1);
+    int x = find_student(s1);
     this -> St[x] = std::move(s2);
 }
 

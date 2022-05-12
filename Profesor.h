@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include "Exceptie.h"
 
 class Profesor {
     std::string nume;
@@ -35,19 +36,25 @@ public:
 
     void sortare_grupe();
 
-    void prof_leave_group(int grupa);
-    virtual void prof_add_group(int grupa);
+    void leave_group(int grupa);
+    virtual void add_group(int grupa);
 
     Profesor &operator=(const Profesor &other) = default;
 
     friend std::ostream &operator<<(std::ostream &os, const Profesor &pr);
+    void check_nr_grupe() {
+        std::cout << "AM AJUNS AICI\n";
+        if(this -> grupe.size() < 2)
+            throw eroare_profesor("");
+        std::cout << "Numarul de grupe" << '\n' << this -> grupe.size();
+    }
 };
 
 class Laborant:public Profesor {
     std::string nume;
     std::vector<int>grupe;
     std::string materie;
-    int salar{};
+    double salar{};
 public:
     Laborant(std::string nume, std::vector<int>grupe, std::string materie, int salar);
     Laborant(std::string nume, std::vector<int>grupe, int salar);
@@ -58,10 +65,9 @@ public:
     void marire_salar(int bonus) override;
 
     void schimbare_materie(std::string materie_noua);
-    void prof_add_group(int grupa) override;
+    void add_group(int grupa) override;
     friend std::ostream &operator<<(std::ostream &os, const Laborant &lab);
     ~Laborant() override = default;
-    Laborant(Laborant &other);
 };
 
 

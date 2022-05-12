@@ -41,8 +41,8 @@ void Secretariat::schimb_secretar_sef(std::string nume) {
     this -> secretar_sef = std::move(nume);
 }
 
-void Secretariat::g(Secretariat &sec) {
-    sec.numar_angajati++;
+void Secretariat::operator++() {
+    this -> numar_angajati++;
 }
 
 std::shared_ptr<Secretariat> Diviziuni_Secretariat::clone() const {
@@ -50,13 +50,8 @@ std::shared_ptr<Secretariat> Diviziuni_Secretariat::clone() const {
     return std::make_shared<Diviziuni_Secretariat>(*this);
 }
 
-Diviziuni_Secretariat::Diviziuni_Secretariat(const Diviziuni_Secretariat &other) : Secretariat(other) {
-    this -> numar_angajati = other.numar_angajati;
-    this -> secretar_sef = other.secretar_sef;
-    this -> an = other.an;
-}
-
 int Diviziuni_Secretariat::get_numar_angajati() const {
     std::cout << "\nGetter din derivata\n";
     return numar_angajati;
 }
+

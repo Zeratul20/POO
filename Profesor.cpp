@@ -34,7 +34,7 @@ void Profesor::sortare_grupe() {
     std::sort(this -> grupe.begin(), this -> grupe.end());
 }
 
-void Profesor::prof_leave_group(int grupa) {
+void Profesor::leave_group(int grupa) {
     for(int i = 0; i < this -> grupe.size(); i++) {
         if(this -> grupe[i] == grupa) {
             for(int j = i; j < this -> grupe.size() - 1; j++)
@@ -46,7 +46,7 @@ void Profesor::prof_leave_group(int grupa) {
     std::sort(this -> grupe.begin(), this -> grupe.end());
 }
 
-void Profesor::prof_add_group(int grupa) {
+void Profesor::add_group(int grupa) {
     this -> grupe.push_back(grupa);
     std::sort(this -> grupe.begin(), this -> grupe.end());
 }
@@ -95,7 +95,7 @@ void Laborant::schimbare_materie(std::string materie_noua) {
     this -> materie = std::move(materie_noua);
 }
 
-void Laborant::prof_add_group(int grupa) {
+void Laborant::add_group(int grupa) {
     this -> grupe.push_back(grupa+1);
     std::sort(this -> grupe.begin(), this -> grupe.end());
 }
@@ -105,23 +105,3 @@ Laborant::Laborant(std::string nume, std::vector<int> grupe, std::string materie
 
 Laborant::Laborant(std::string nume, std::vector<int> grupe, int salar)
         :nume(std::move(nume)), grupe(std::move(grupe)), salar(salar) {}
-
-Laborant::Laborant(Laborant &other) : Profesor(other) {
-    std::cout << "\nA intrat in copy and swap constructor!" << '\n';
-    std::swap(this -> nume, other.nume);
-    std::vector<int>aux;
-    aux.clear();
-    for(auto grupa:this -> grupe) {
-        aux.push_back(grupa);
-    }
-    this -> grupe.clear();
-    for(auto grupa:other.grupe) {
-        this -> grupe.push_back(grupa);
-    }
-    other.grupe.clear();
-    for(auto grupa:aux) {
-        other.grupe.push_back(grupa);
-    }
-    std::swap(this -> materie, other.materie);
-    std::swap(this -> salar, other.salar);
-}

@@ -5,6 +5,9 @@
 #include "Secretariat.h"
 #include "Facultate.h"
 #include <memory>
+#include "Exceptie.h"
+
+using std::swap;
 int main() {
     Student stt1{"Andrei", 130, 7};
     Student stt2{"Ion", 140, 8};
@@ -47,7 +50,7 @@ int main() {
     std::cout << '\n';
     std::cout << "Profesor Paraseste grupa 131\n";
     oldpr = pr;
-    pr.prof_leave_group(131);
+    pr.leave_group(131);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     fac2.update_prof(oldpr, pr);
@@ -56,7 +59,7 @@ int main() {
     std::cout << fac2 << '\n';
     std::cout << "A fost adaugata grupa 133\n";
     oldpr = pr;
-    pr.prof_add_group(133);
+    pr.add_group(133);
     for(int i = 0; i<pr.get_grupe().size(); i++)
         std::cout << pr.get_grupe()[i] << ' ';
     fac2.update_prof(oldpr, pr);
@@ -98,16 +101,10 @@ int main() {
     std::cout << st1->get_grupa() << '\n';
     //st1 = std::make_shared<Student_bursant>(st1);
     std::cout << "Studenti inainte de swap\n" << *st2 << *st3 <<'\n';
-    Student::swap(st2, st3);
+    swap(st2, st3);
     std::cout << "Studenti dupa swap\n" << *st2 << *st3 <<'\n';
     Student_bursant stb2{st2, 800};
     std::cout << stb2 << '\n';
-    stb2.set_medie();
-    std::cout << "st2 si stb2 au aceeasi medie adica 8 la inceput\n";
-    st2 -> creste_medie(0.5);
-    stb2.creste_medie(0.5);
-    std::cout << "Media lui st2 dupa marire: " << st2->get_medie() << '\n';
-    std::cout << "Media lui stb2 dupa marire: " << stb2.get_medie() << '\n';
     std::cout << *st2 << '\n' << *st3 << '\n';
     std::shared_ptr<Student> st4 = std::make_shared<Student>(stt1);
     std::shared_ptr<Student> st5 = std::make_shared<Student>(stt2);
@@ -127,13 +124,13 @@ int main() {
     std::cout << lab3 << '\n';
     std::cout << lab << '\n';
     std::cout << lab.get_salar() << '\n';
-    lab.prof_add_group(160);
+    lab.add_group(160);
     std::cout << lab << '\n';
     std::cout << "MATERIE INAINTE\n" << lab2.get_materie() << '\n';
     lab2.schimbare_materie("LFA");
     std::cout << "MATERIE DUPA\n" << lab2.get_materie() << '\n';
     std::cout << lab << '\n';
-    pr.prof_add_group(160);
+    pr.add_group(160);
     std::cout << pr << '\n';
     std::cout << "Salariul profesorului inainte de marire\n" << pr.get_salar() << '\n';
     pr.marire_salar(1000);
@@ -144,34 +141,37 @@ int main() {
     std::cout << stb2.get_medie();
     Laborant lab4{"Alin", {131, 130, 142, 140}, "SD", 1500};
     Laborant lab5{"Ioana", {132, 130, 141, 150}, "LCM", 1700};
-    Laborant lab6(lab4);
-    std::cout << lab6 << '\n';
     std::cout << "\n\nPARTEA CU SECRETARIAT\n\n";
-    Diviziuni_Secretariat divsec{7, "Mara", 1};
+    Diviziuni_Secretariat divsec{7, 1};
+    std::cout << divsec.get_an() << '\n';
+    divsec.vin_secretari(3);
+    std::cout << divsec.get_numar_angajati() << '\n';
     auto copie = divsec.clone();
     std::cout << sec.get_numar_angajati();
-    copie -> g(sec);
+    copie -> operator++();
     std::cout << sec.get_numar_angajati();
     std::cout <<'\n';
 
     std::cout << "\n\nPARTEA CU EXCEPTII\n\n";
-    Student *st2_up = new Student_bursant;
-    try {
-        auto &der = dynamic_cast<Student_bursant&>(*st2_up);
-        Student_bursant::f();
-    } catch(std::bad_cast &err) {
-        std::cout << err.what() << '\n';
-    }
-    delete st2_up;
     std::cout << st3 -> get_medie() << '\n';
-    Student::set_medie(st3, 3);
+    st3 -> set_medie(11);
+    std::cout << *st3 << '\n';
+    Student ostn{"Ab", 130, 7};
+    std::shared_ptr<Student>stn = std::make_shared<Student>(ostn);
+    std::cout << pr << '\n';
+    Profesor prof{"Ionel", {130}, 2000};
     try {
-        if(st3 -> get_medie() > 10 || st3 -> get_medie() < 1)
-            throw eroare_facultate("eroare facultate");
-        else if(st3 -> get_medie() < 5)
-            throw eroare_student("eroare student");
+        st3 -> check_medie();
+        stn -> check_nume();
+        prof.check_nr_grupe();
     } catch (my_exceptie &err) {
         std::cout << "catch logic err\n" << err.what();
+    }
+
+    try {
+        prof.check_nr_grupe();
+    } catch (my_exceptie &err) {
+        std::cout << "\ncatch logic err\n" << err.what();
     }
     return 0;
 }

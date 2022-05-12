@@ -55,31 +55,24 @@ Student &Student::operator=(const std::shared_ptr<Student> &other) {
     return *this;
 }
 
-void Student::swap(std::shared_ptr<Student> &st1, std::shared_ptr<Student> &st2) {
-    std::shared_ptr<Student> aux;
-    aux = st1;
-    st1 = st2;
-    st2 = aux;
-}
-
-void Student::creste_medie(double marire) {
-    medie += marire;
+void Student::set_medie(double medie_noua) {
+    this -> medie = medie_noua;
 }
 
 
 ///STUDENT BURSANT
 
-Student_bursant::Student_bursant(std::shared_ptr<Student> s, int bursa) : s(std::move(s)), bursa(bursa) {}
+Student_bursant::Student_bursant(std::shared_ptr<Student> stud, int bursa) : stud(std::move(stud)), bursa(bursa) {}
 
-Student_bursant::Student_bursant(std::shared_ptr<Student> s) : s(std::move(s)) {}
+Student_bursant::Student_bursant(std::shared_ptr<Student> stud) : stud(std::move(stud)) {}
 
 std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b) {
-    os << *st_b.s;
+    os << *st_b.stud;
     os << st_b.bursa;
     return os;
 }
 
-Student_bursant::Student_bursant(std::shared_ptr<Student_bursant> const &other) : s(other -> s), bursa(other -> bursa) {
+Student_bursant::Student_bursant(std::shared_ptr<Student_bursant> const &other) : stud(other -> stud), bursa(other -> bursa) {
     /*this -> s = other.s;
     this -> bursa = other.bursa;*/
 }
@@ -93,7 +86,7 @@ void Student_bursant::modificare_bursa(int val) {
 }
 
 int Student_bursant::get_grupa() {
-    return s -> get_grupa();
+    return stud -> get_grupa();
 }
 
 int Student_bursant::get_bursa() const {
@@ -109,19 +102,6 @@ void Student_bursant::transfer_grupa(int grupa_noua) {
     std::cout << "\nAJUNG IN DER STUDENT TRANSFER\n";
 }
 
-void Student_bursant::set_medie() {
-    medie = s -> get_medie();
-}
-
 double Student_bursant::get_medie() {
     return medie;
-}
-
-void Student_bursant::creste_medie(double marire) {
-    ///Studentul bursant are o marire de 1.5 ori mare mare decat studentul normal.
-    this -> medie += 1.5 * marire;
-}
-
-void Student_bursant::f() {
-    std::cout << "f Student bursant\n";
 }

@@ -11,6 +11,7 @@
 #include <memory>
 #include <utility>
 #include <algorithm>
+#include "Exceptie.h"
 
 class Student {
 protected:
@@ -29,27 +30,30 @@ public:
     [[nodiscard]] double get_medie() const;
     friend std::ostream &operator<<(std::ostream &os, const Student &st);
 
-    virtual void creste_medie(double marire);
 
     virtual void transfer_grupa(int grupa_noua);
-    static void set_medie(const std::shared_ptr<Student> &st, double medie) {
-        st -> medie = medie;
-    }
+    void set_medie(double medie_noua);
 
     void schimbare_grupe_2_studenti(const std::shared_ptr<Student>& s2);
     friend bool operator==(const std::shared_ptr<Student>& st1, const std::shared_ptr<Student>& st2);
     Student &operator=(std::shared_ptr<Student> const &other);
-    static void swap(std::shared_ptr<Student> &st1, std::shared_ptr<Student> &st2);
-
+    void check_medie() const {
+        if(this -> medie < 1 or this -> medie > 10)
+            throw eroare_medie("eroare medie");
+    }
+    void check_nume() const {
+        if((this -> nume).size() < 3)
+            throw eroare_student("studentul nu are un nume existent");
+    }
 };
 
 class Student_bursant: public Student {
-    std::shared_ptr<Student> s;
+    std::shared_ptr<Student> stud;
     int bursa{};
 public:
-    Student_bursant(std::shared_ptr<Student> s, int bursa);
+    Student_bursant(std::shared_ptr<Student> stud, int bursa);
 
-    explicit Student_bursant(std::shared_ptr<Student> s);
+    explicit Student_bursant(std::shared_ptr<Student> stud);
 
     explicit Student_bursant(std::shared_ptr<Student_bursant> const &other);
     void transfer_grupa(int grupa_noua) override;
@@ -57,38 +61,13 @@ public:
     void modificare_bursa(int val);
 
     [[nodiscard]] int get_grupa();
-    void set_medie();
     double get_medie();
     [[nodiscard]] int get_bursa() const;
     //std::shared_ptr<Student> get_student();
-    void creste_medie(double marire) override;
     Student_bursant() = default;
     ~Student_bursant() override = default;
     friend std::ostream &operator<<(std::ostream &os, const Student_bursant &st_b);
 
-    static void f();
-
-};
-
-class my_exceptie:public std::runtime_error {
-public:
-    explicit my_exceptie(const std::string &arg): runtime_error(arg) {
-        std::cout << "my_exceptie err\n";
-    }
-};
-
-class eroare_student:public my_exceptie {
-public:
-    explicit eroare_student(const std::string &arg): my_exceptie(arg) {
-        std::cout << "student err\n";
-    }
-};
-
-class eroare_facultate:public my_exceptie {
-public:
-    explicit eroare_facultate(const std::string &arg): my_exceptie(arg) {
-        std::cout << "facultate err\n";
-    }
 };
 
 
