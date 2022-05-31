@@ -5,8 +5,7 @@
 #include "Secretariat.h"
 #include <algorithm>
 #include <utility>
-template class
-        Secretariat<int, std::string>;
+
 template<typename T1, typename T2>
 Secretariat<T1, T2>::Secretariat(T1 numar_angajati, T2 secretar_sef)
         :numar_angajati{numar_angajati}, secretar_sef{std::move(secretar_sef)} {
@@ -78,5 +77,8 @@ int Diviziuni_Secretariat::get_numar_angajati() const {
     std::cout << "\nGetter din derivata\n";
     return numar_angajati;
 }
+
+template class
+        Secretariat<int, std::string>;
 
 
