@@ -16,9 +16,9 @@ class Facultate {
     std::string nume;
     std::vector<std::shared_ptr<Student>>St;
     std::vector<Profesor>Pr;
-    Secretariat Sec;
+    Secretariat<int, std::string> Sec;
 public:
-    Facultate(std::string nume, std::vector<std::shared_ptr<Student>>St, std::vector<Profesor>Pr, const Secretariat& Sec);
+    Facultate(std::string nume, std::vector<std::shared_ptr<Student>>St, std::vector<Profesor>Pr, const Secretariat<int, std::string>& Sec);
     Facultate(const Facultate &other) = default;
     Facultate &operator=(const Facultate &other) = default;
     ~Facultate() = default;
@@ -39,7 +39,7 @@ public:
 
     void update_prof(const Profesor& pr1, const Profesor& pr2);
 
-    void update_secretariat(const Secretariat& sec);
+    void update_secretariat(const Secretariat<int, std::string>& sec);
 
     void make_student_bursant();
 

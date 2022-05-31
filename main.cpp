@@ -21,13 +21,14 @@ int main() {
     Student oldst1;
     Student oldst2;
     Student oldst3;
-    Secretariat sc{10, "Alina"};
+    Secretariat<int, std::string> sc{10, "Alina"};
     Profesor pr{"Paun", {131, 152, 143, 141, 151}, 6000}, pr2{"Anca", {131, 142, 141, 134, 152}, 5000};
     Profesor oldpr, oldpr2;
     Facultate fac2{"POLI", {st1, st2, st3}, {pr, pr2}, sc};
     Facultate fac3{"ASE", {st1, st2, st3}, {pr, pr2}, sc};
     std::cout << *st1 <<'\n';
-    Secretariat sec{10, "Alina"};
+    Secretariat<int, std::string> sec{10, "Alina"};
+    Secretariat<int, std::string> sec2{5, 8, "Contabil"};
     std::cout << "FMI\n";
     //std::cout << "Studenti\n" << fac2.get_studenti() << "\nProfesori\n" << fac2.get_profesori() << "\nSecretariat\n" << fac2.get_secretariat() << '\n';
     std::cout << fac2;
@@ -152,6 +153,12 @@ int main() {
     std::cout << sec.get_numar_angajati();
     std::cout <<'\n';
 
+    SecretariatBuilder secb;
+    Secretariat<int, std::string>secr = secb.nrRelatiicuStudentii(5).tipSecretar("Contabilitate").build();
+    SecretariatBuilder sec2b(sec2);
+    std::cout << sec2b << '\n';
+
+    Secretariat<int, std::string>secr2 = secb.nrRelatiicuProfii(7).tipSecretar("Dosarier").build();
     std::cout << "\n\nPARTEA CU EXCEPTII\n\n";
     std::cout << st3 -> get_medie() << '\n';
     st3 -> set_medie(11);

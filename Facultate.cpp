@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <utility>
 
-Facultate::Facultate(std::string nume, std::vector<std::shared_ptr<Student>> St, std::vector<Profesor> Pr, const Secretariat &Sec)
+Facultate::Facultate(std::string nume, std::vector<std::shared_ptr<Student>> St, std::vector<Profesor> Pr, const Secretariat<int, std::string> &Sec)
         :nume{std::move(nume)}, St{std::move(St)}, Pr{std::move(Pr)}, Sec(Sec) {
 }
 
@@ -61,7 +61,7 @@ void Facultate::update_prof(const Profesor &pr1, const Profesor &pr2) {
     this -> Pr[x] = pr2;
 }
 
-void Facultate::update_secretariat(const Secretariat &sec) {
+void Facultate::update_secretariat(const Secretariat<int, std::string> &sec) {
     this -> Sec = sec;
 }
 

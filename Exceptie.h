@@ -9,30 +9,22 @@
 
 class my_exceptie:public std::runtime_error {
 public:
-    explicit my_exceptie(const std::string &arg): runtime_error(arg) {
-        std::cout << "my_exceptie err\n";
-    }
+    explicit my_exceptie(const std::string &arg);
 };
 
 class eroare_student:public my_exceptie {
 public:
-    explicit eroare_student(const std::string &arg): my_exceptie(arg) {
-        std::cout << "student err\n";
-    }
+    explicit eroare_student(const std::string &arg);
 };
 
 class eroare_medie:public my_exceptie {
 public:
-    explicit eroare_medie(const std::string &arg): my_exceptie(arg) {
-        std::cout << "err medie imposibila\n";
-    }
+    explicit eroare_medie(const std::string &arg);
 };
 
 class eroare_profesor:public my_exceptie {
 public:
-    explicit eroare_profesor(const std::string &arg): my_exceptie(arg) {
-        std::cout << "err numar insuficient de grupe prof";
-    }
+    explicit eroare_profesor(const std::string &arg);
 };
 
 
