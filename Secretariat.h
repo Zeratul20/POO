@@ -20,12 +20,8 @@ protected:
     T2 tipSecretar;
 public:
     Secretariat(T1 numar_angajati, T2 secretar_sef);
-    explicit Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {numar_angajati = 5;}
-    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, T2 tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {
-        nrRelatiicuStudentii = 3;
-        nrRelatiicuProfii = 2;
-        tipSecretar = "Contabil";
-    }
+    explicit Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {}
+    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, T2 tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
     Secretariat() = default;
     Secretariat(const Secretariat &other);
 
