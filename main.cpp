@@ -29,6 +29,16 @@ int main() {
     std::cout << *st1 <<'\n';
     Secretariat<int, std::string> sec{10, "Alina"};
     Secretariat<int, std::string> sec2{5, 8, "Contabil"};
+    Student stIF = Student_factory::IF();
+    Student stIFR = Student_factory::IFR();
+    Student stID = Student_factory::ID();
+    Student stMaster = Student_factory::Master();
+    Student stDoctor = Student_factory::Doctor();
+    std::cout << stIF << '\n';
+    std::cout << stIFR << '\n';
+    std::cout << stID << '\n';
+    std::cout << stMaster << '\n';
+    std::cout << stDoctor << '\n';
     std::cout << "FMI\n";
     //std::cout << "Studenti\n" << fac2.get_studenti() << "\nProfesori\n" << fac2.get_profesori() << "\nSecretariat\n" << fac2.get_secretariat() << '\n';
     std::cout << fac2;

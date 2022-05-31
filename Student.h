@@ -70,5 +70,12 @@ public:
 
 };
 
-
+class Student_factory {
+public:
+    static Student IF() {return {"Andrei", 151, 9.5};}
+    static Student IFR() {return {"Ioan", 170, 6.3};}
+    static Student ID() {return {"Ana", 180, 5.3};}
+    static Student Master() {return {"Alin", 404, 8.7};}
+    static Student Doctor() {return {"Ioana", 503, 10};}
+};
 #endif //MAIN_CPP_STUDENT_H
