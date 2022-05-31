@@ -68,6 +68,13 @@ T2 Secretariat<T1, T2>::get_tipSecretar() const{
     return tipSecretar;
 }
 
+template<typename T1, typename T2>
+Secretariat<T1, T2>::Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {}
+
+template<typename T1, typename T2>
+Secretariat<T1, T2>::Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, const T2 &tipSecretar)
+        :nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
+
 std::shared_ptr<Secretariat<int, std::string>> Diviziuni_Secretariat::clone() const {
     std::cout << "\nAm intrat in clone\n";
     return std::make_shared<Diviziuni_Secretariat>(*this);
@@ -78,7 +85,46 @@ int Diviziuni_Secretariat::get_numar_angajati() const {
     return numar_angajati;
 }
 
+Diviziuni_Secretariat::Diviziuni_Secretariat(int numar_angajati, int an) : Secretariat<int, std::string>(numar_angajati), an(an) {}
+
+int Diviziuni_Secretariat::get_an() const {
+    return this -> an;
+}
+
+void Diviziuni_Secretariat::vin_secretari(int nr_noi) {
+    this -> numar_angajati += nr_noi / 3;
+}
+
+SecretariatBuilder::SecretariatBuilder(const Secretariat<int, std::string> &sec2) :sec(sec2) {
+    std::cout << "\n\nSECRETARIAT BUILDER\n\n";
+    sec.nrRelatiicuStudentii = sec2.nrRelatiicuStudentii;
+    sec.nrRelatiicuProfii = sec2.nrRelatiicuProfii;
+    sec.tipSecretar = sec2.tipSecretar;
+}
+
+SecretariatBuilder &SecretariatBuilder::nrRelatiicuStudentii(const int nr) {
+    sec.nrRelatiicuStudentii = nr;
+    return *this;
+}
+
+SecretariatBuilder &SecretariatBuilder::nrRelatiicuProfii(const int nr) {
+    sec.nrRelatiicuProfii = nr;
+    return *this;
+}
+
+SecretariatBuilder &SecretariatBuilder::tipSecretar(const std::string &tip) {
+    sec.tipSecretar = tip;
+    return *this;
+}
+
+Secretariat<int, std::string> SecretariatBuilder::build() {
+    return sec;
+}
+
+std::ostream &operator<<(std::ostream &os, const SecretariatBuilder &builder) {
+    os << "nrRelatiicuStudentii: " << builder.sec.get_nrRelatiicuStudentii() << "\nnrRelatiicuProfii: " << builder.sec.get_nrRelatiicuProfii() << "\ntipSecretar: " << builder.sec.get_tipSecretar() << '\n';
+    return os;
+}
+
 template class
         Secretariat<int, std::string>;
-
-

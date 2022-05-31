@@ -20,8 +20,8 @@ protected:
     T2 tipSecretar;
 public:
     Secretariat(T1 numar_angajati, T2 secretar_sef);
-    explicit Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {}
-    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, const T2 &tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
+    explicit Secretariat(T1 numar_angajati);
+    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, const T2 &tipSecretar);
     Secretariat() = default;
     Secretariat(const Secretariat &other);
 
@@ -45,50 +45,27 @@ class Diviziuni_Secretariat:public Secretariat<int, std::string> {
     int an;
 public:
     [[nodiscard]] std::shared_ptr<Secretariat> clone() const;
-    Diviziuni_Secretariat(int numar_angajati, int an): Secretariat<int, std::string>(numar_angajati), an(an) {}
+    Diviziuni_Secretariat(int numar_angajati, int an);
     [[nodiscard]] int get_numar_angajati() const override;
-    [[nodiscard]] int get_an() const {
-        return this -> an;
-    }
-    void vin_secretari(int nr_noi) override {
-        this -> numar_angajati += nr_noi / 3;
-    }
+    [[nodiscard]] int get_an() const;
+    void vin_secretari(int nr_noi) override;
 };
 
 class SecretariatBuilder{
     Secretariat<int, std::string>sec;
 public:
     SecretariatBuilder() = default;
-    explicit SecretariatBuilder(const Secretariat<int, std::string>&sec2):sec(sec2) {
-        std::cout << "\n\nSECRETARIAT BUILDER\n\n";
-        sec.nrRelatiicuStudentii = sec2.nrRelatiicuStudentii;
-        sec.nrRelatiicuProfii = sec2.nrRelatiicuProfii;
-        sec.tipSecretar = sec2.tipSecretar;
-    }
+    explicit SecretariatBuilder(const Secretariat<int, std::string>&sec2);
 
-    SecretariatBuilder &nrRelatiicuStudentii(const int nr) {
-        sec.nrRelatiicuStudentii = nr;
-        return *this;
-    }
+    SecretariatBuilder &nrRelatiicuStudentii(const int nr);
 
-    SecretariatBuilder &nrRelatiicuProfii(const int nr) {
-        sec.nrRelatiicuProfii = nr;
-        return *this;
-    }
+    SecretariatBuilder &nrRelatiicuProfii(const int nr);
 
-    SecretariatBuilder &tipSecretar(const std::string& tip) {
-        sec.tipSecretar = tip;
-        return *this;
-    }
+    SecretariatBuilder &tipSecretar(const std::string& tip);
 
-    Secretariat<int, std::string> build() {
-        return sec;
-    }
+    Secretariat<int, std::string> build();
 
-    friend std::ostream &operator<<(std::ostream &os, const SecretariatBuilder &builder) {
-        os << "nrRelatiicuStudentii: " << builder.sec.get_nrRelatiicuStudentii() << "\nnrRelatiicuProfii: " << builder.sec.get_nrRelatiicuProfii() << "\ntipSecretar: " << builder.sec.get_tipSecretar() << '\n';
-        return os;
-    }
+    friend std::ostream &operator<<(std::ostream &os, const SecretariatBuilder &builder);
 };
 
 

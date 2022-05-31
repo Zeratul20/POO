@@ -105,3 +105,13 @@ void Student_bursant::transfer_grupa(int grupa_noua) {
 double Student_bursant::get_medie() {
     return medie;
 }
+
+Student Student_factory::IF() {return {"Andrei", 151, 9.5};}
+
+Student Student_factory::IFR() {return {"Ioan", 170, 6.3};}
+
+Student Student_factory::ID() {return {"Ana", 180, 5.3};}
+
+Student Student_factory::Master() {return {"Alin", 404, 8.7};}
+
+Student Student_factory::Doctor() {return {"Ioana", 503, 10};}
