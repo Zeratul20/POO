@@ -20,8 +20,12 @@ protected:
     T2 tipSecretar;
 public:
     Secretariat(T1 numar_angajati, T2 secretar_sef);
-    explicit Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {}
-    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, T2 tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
+    explicit Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {numar_angajati = 5;}
+    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, T2 tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {
+        nrRelatiicuStudentii = 3;
+        nrRelatiicuProfii = 2;
+        tipSecretar = "Contabil";
+    }
     Secretariat() = default;
     Secretariat(const Secretariat &other);
 
@@ -66,18 +70,18 @@ public:
         sec.tipSecretar = sec2.tipSecretar;
     }
 
-    SecretariatBuilder &nrRelatiicuStudentii(int nr) {
+    SecretariatBuilder &nrRelatiicuStudentii(const int nr) {
         sec.nrRelatiicuStudentii = nr;
         return *this;
     }
 
-    SecretariatBuilder &nrRelatiicuProfii(int nr) {
+    SecretariatBuilder &nrRelatiicuProfii(const int nr) {
         sec.nrRelatiicuProfii = nr;
         return *this;
     }
 
-    SecretariatBuilder &tipSecretar(std::string tip) {
-        sec.tipSecretar = std::move(tip);
+    SecretariatBuilder &tipSecretar(const std::string& tip) {
+        sec.tipSecretar = tip;
         return *this;
     }
 
