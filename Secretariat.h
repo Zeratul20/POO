@@ -21,7 +21,7 @@ protected:
 public:
     Secretariat(T1 numar_angajati, T2 secretar_sef);
     explicit Secretariat(T1 numar_angajati):numar_angajati(numar_angajati) {}
-    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, T2 tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
+    Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, const T2 tipSecretar):nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
     Secretariat() = default;
     Secretariat(const Secretariat &other);
 
