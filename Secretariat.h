@@ -13,10 +13,10 @@
 template<typename T1, typename T2>
 class Secretariat {
 protected:
-    T1 numar_angajati;
+    T1 numar_angajati{};
     T2 secretar_sef;
-    T1 nrRelatiicuStudentii;
-    T1 nrRelatiicuProfii;
+    T1 nrRelatiicuStudentii{};
+    T1 nrRelatiicuProfii{};
     T2 tipSecretar;
 public:
     Secretariat(T1 numar_angajati, T2 secretar_sef);
