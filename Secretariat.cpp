@@ -135,4 +135,4 @@ template class
         Secretariat<int, std::string>;
 
 template class
-        Secretariat<int, int>;
+        Secretariat<double, std::string>;

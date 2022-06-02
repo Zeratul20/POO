@@ -168,7 +168,7 @@ int main() {
     std::cout << sec2b << '\n';
     Secretariat<int, std::string>secr2 = secb.nrRelatiicuProfii(7).tipSecretar("Dosarier").build();
 
-    Secretariat<int, int>sec10{8};
+    Secretariat<double, std::string>sec10{8, "Ioana"};
     sec10.setNrRelatiicuProfii();
     std::cout << sec10.get_nrRelatiicuProfii() << '\n';
     std::cout << "\n\nPARTEA CU EXCEPTII\n\n";

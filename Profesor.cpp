@@ -9,7 +9,7 @@
 #include <algorithm>
 
 Profesor::Profesor(std::string nume) : nume(std::move(nume)) {}
-Profesor::Profesor(std::string nume, std::vector<int> grupe, double salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
+Profesor::Profesor(std::string nume, std::vector<int> grupe, int salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
 Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe), salar(other.salar) {
     this -> nume = other.nume;
     this -> grupe = other.grupe;
@@ -63,7 +63,7 @@ double Profesor::get_salar() const {
     return salar;
 }
 
-void Profesor::marire_salar(double bonus) {
+void Profesor::marire_salar(int bonus) {
     salar += bonus;
 }
 
