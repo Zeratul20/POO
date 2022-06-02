@@ -9,7 +9,7 @@
 #include <algorithm>
 
 Profesor::Profesor(std::string nume) : nume(std::move(nume)) {}
-Profesor::Profesor(std::string nume, std::vector<int> grupe, int salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
+Profesor::Profesor(std::string nume, std::vector<int> grupe, double salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
 Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe), salar(other.salar) {
     this -> nume = other.nume;
     this -> grupe = other.grupe;
@@ -59,11 +59,11 @@ std::ostream &operator<<(std::ostream &os, const Profesor &pr) {
     return os;
 }
 
-int Profesor::get_salar() const {
+double Profesor::get_salar() const {
     return salar;
 }
 
-void Profesor::marire_salar(int bonus) {
+void Profesor::marire_salar(double bonus) {
     salar += bonus;
 }
 
@@ -82,11 +82,11 @@ std::string Laborant::get_materie() {
     return materie;
 }
 
-int Laborant::get_salar() const {
+double Laborant::get_salar() const {
     return salar;
 }
 
-void Laborant::marire_salar(int bonus) {
+void Laborant::marire_salar(double bonus) {
     //Laborantul primeste doar 10% din acea marire.
     salar += bonus/10;
 }
@@ -101,7 +101,7 @@ void Laborant::add_group(int grupa) {
 }
 
 Laborant::Laborant(std::string nume, std::vector<int> grupe, std::string materie, int salar)
-        :nume(std::move(nume)), grupe(std::move(grupe)), materie(std::move(materie)), salar(salar) {}
+        : Profesor(std::move(nume), std::move(grupe)), materie(std::move(materie)), salar(salar) {}
 
 Laborant::Laborant(std::string nume, std::vector<int> grupe, int salar)
-        :nume(std::move(nume)), grupe(std::move(grupe)), salar(salar) {}
+        : Profesor(std::move(nume), std::move(grupe)), salar(salar) {}

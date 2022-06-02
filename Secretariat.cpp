@@ -75,6 +75,11 @@ template<typename T1, typename T2>
 Secretariat<T1, T2>::Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, const T2 &tipSecretar)
         :nrRelatiicuStudentii(nrRelatiicuStudentii), nrRelatiicuProfii(nrRelatiicuProfii), tipSecretar(tipSecretar) {}
 
+template<typename T1, typename T2>
+void Secretariat<T1, T2>::setNrRelatiicuProfii() {
+    nrRelatiicuProfii = numar_angajati - nrRelatiicuStudentii;
+}
+
 std::shared_ptr<Secretariat<int, std::string>> Diviziuni_Secretariat::clone() const {
     std::cout << "\nAm intrat in clone\n";
     return std::make_shared<Diviziuni_Secretariat>(*this);
@@ -128,3 +133,6 @@ std::ostream &operator<<(std::ostream &os, const SecretariatBuilder &builder) {
 
 template class
         Secretariat<int, std::string>;
+
+template class
+        Secretariat<int, int>;

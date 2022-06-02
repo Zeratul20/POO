@@ -13,17 +13,20 @@
 template<typename T1, typename T2>
 class Secretariat {
 protected:
-    T1 numar_angajati{};
+    T1 numar_angajati{10};
     T2 secretar_sef;
-    T1 nrRelatiicuStudentii{};
-    T1 nrRelatiicuProfii{};
+    T1 nrRelatiicuStudentii{5};
+    T1 nrRelatiicuProfii{5};
     T2 tipSecretar;
 public:
     Secretariat(T1 numar_angajati, T2 secretar_sef);
     explicit Secretariat(T1 numar_angajati);
     Secretariat(T1 nrRelatiicuStudentii, T1 nrRelatiicuProfii, const T2 &tipSecretar);
+
     Secretariat() = default;
     Secretariat(const Secretariat &other);
+
+    void setNrRelatiicuProfii();
 
     [[nodiscard]] virtual T1 get_numar_angajati() const;
     [[nodiscard]] T2 get_secretar_sef() const;
@@ -57,9 +60,9 @@ public:
     SecretariatBuilder() = default;
     explicit SecretariatBuilder(const Secretariat<int, std::string>&sec2);
 
-    SecretariatBuilder &nrRelatiicuStudentii(const int nr);
+    SecretariatBuilder &nrRelatiicuStudentii(int nr);
 
-    SecretariatBuilder &nrRelatiicuProfii(const int nr);
+    SecretariatBuilder &nrRelatiicuProfii(int nr);
 
     SecretariatBuilder &tipSecretar(const std::string& tip);
 

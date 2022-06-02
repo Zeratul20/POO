@@ -11,15 +11,18 @@
 #include <vector>
 #include <algorithm>
 #include <iostream>
+#include <memory>
 #include "Exceptie.h"
 
 class Profesor {
+protected:
     std::string nume;
     std::vector<int>grupe;
-    int salar{};
+    double salar{};
 public:
-    Profesor(std::string nume, std::vector<int>grupe, int salar);
+    Profesor(std::string nume, std::vector<int>grupe, double salar);
     Profesor(const Profesor &other);
+    Profesor(std::string nume, std::vector<int> grupe):nume(std::move(nume)), grupe(std::move(grupe)) {}
     Profesor() = default;
 
     explicit Profesor(std::string nume);
@@ -28,9 +31,9 @@ public:
     [[nodiscard]] std::string get_nume() const;
     [[nodiscard]] std::vector<int> get_grupe() const;
 
-    [[nodiscard]] virtual int get_salar() const;
+    [[nodiscard]] virtual double get_salar() const;
 
-    virtual void marire_salar(int bonus);
+    virtual void marire_salar(double bonus);
 
     bool operator==(const Profesor &other);
 
@@ -51,18 +54,17 @@ public:
 };
 
 class Laborant:public Profesor {
-    std::string nume;
-    std::vector<int>grupe;
     std::string materie;
     double salar{};
 public:
+
     Laborant(std::string nume, std::vector<int>grupe, std::string materie, int salar);
     Laborant(std::string nume, std::vector<int>grupe, int salar);
 
     std::string get_materie();
-    [[nodiscard]] int get_salar() const override;
+    [[nodiscard]] double get_salar() const override;
 
-    void marire_salar(int bonus) override;
+    void marire_salar(double bonus) override;
 
     void schimbare_materie(std::string materie_noua);
     void add_group(int grupa) override;
