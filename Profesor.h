@@ -18,9 +18,9 @@ class Profesor {
 protected:
     std::string nume;
     std::vector<int>grupe;
-    int salar{};
+    double salar{};
 public:
-    Profesor(std::string nume, std::vector<int>grupe, int salar);
+    Profesor(std::string nume, std::vector<int>grupe, double salar);
     Profesor(const Profesor &other);
     Profesor(std::string nume, std::vector<int> grupe):nume(std::move(nume)), grupe(std::move(grupe)) {}
     Profesor() = default;
@@ -33,7 +33,7 @@ public:
 
     [[nodiscard]] virtual double get_salar() const;
 
-    void marire_salar(int bonus);
+    void marire_salar(double bonus);
 
     bool operator==(const Profesor &other);
 
@@ -55,11 +55,10 @@ public:
 
 class Laborant:public Profesor {
     std::string materie;
-    double salar{};
 public:
 
-    Laborant(std::string nume, std::vector<int>grupe, std::string materie, int salar);
-    Laborant(std::string nume, std::vector<int>grupe, int salar);
+    Laborant(std::string nume, std::vector<int>grupe, double salar, std::string materie);
+    Laborant(std::string nume, std::vector<int>grupe, double salar);
 
     std::string get_materie();
     [[nodiscard]] double get_salar() const override;

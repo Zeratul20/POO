@@ -129,7 +129,7 @@ int main() {
     std::cout << "\n\nPARTEA CU PROFI\n\n";
     std::cout << pr << '\n';
     Laborant lab{"Adi", {130, 151, 150, 134}, 2000};
-    Laborant lab2{"Ana", {131, 132, 142}, "POO", 1000};
+    Laborant lab2{"Ana", {131, 132, 142}, 1000, "POO"};
     Laborant lab3 = lab2;
     lab3.sortare_grupe();
     std::cout << lab3 << '\n';
@@ -150,8 +150,8 @@ int main() {
     lab.marire_salar(1000);
     std::cout << "Salariul laborantului dupa marire\n" << lab.get_salar() << '\n';
     std::cout << stb2.get_medie();
-    Laborant lab4{"Alin", {131, 130, 142, 140}, "SD", 1500};
-    Laborant lab5{"Ioana", {132, 130, 141, 150}, "LCM", 1700};
+    Laborant lab4{"Alin", {131, 130, 142, 140}, 1599, "SD"};
+    Laborant lab5{"Ioana", {132, 130, 141, 150}, 1700, "LCM"};
     std::cout << "\n\nPARTEA CU SECRETARIAT\n\n";
     Diviziuni_Secretariat divsec{7, 1};
     std::cout << divsec.get_an() << '\n';

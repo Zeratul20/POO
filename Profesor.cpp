@@ -9,7 +9,7 @@
 #include <algorithm>
 
 Profesor::Profesor(std::string nume) : nume(std::move(nume)) {}
-Profesor::Profesor(std::string nume, std::vector<int> grupe, int salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
+Profesor::Profesor(std::string nume, std::vector<int> grupe, double salar) :nume{std::move(nume)}, grupe{std::move(grupe)}, salar(salar) {}
 Profesor::Profesor(const Profesor &other) :nume(other.nume), grupe(other.grupe), salar(other.salar) {
     this -> nume = other.nume;
     this -> grupe = other.grupe;
@@ -63,7 +63,7 @@ double Profesor::get_salar() const {
     return salar;
 }
 
-void Profesor::marire_salar(int bonus) {
+void Profesor::marire_salar(double bonus) {
     salar += bonus;
 }
 
@@ -100,8 +100,8 @@ void Laborant::add_group(int grupa) {
     std::sort(this -> grupe.begin(), this -> grupe.end());
 }
 
-Laborant::Laborant(std::string nume, std::vector<int> grupe, std::string materie, int salar)
-        : Profesor(std::move(nume), std::move(grupe)), materie(std::move(materie)), salar(salar) {}
+Laborant::Laborant(std::string nume, std::vector<int> grupe, double salar, std::string materie)
+        : Profesor(std::move(nume), std::move(grupe), salar), materie(std::move(materie)){}
 
-Laborant::Laborant(std::string nume, std::vector<int> grupe, int salar)
-        : Profesor(std::move(nume), std::move(grupe)), salar(salar) {}
+Laborant::Laborant(std::string nume, std::vector<int> grupe, double salar)
+        : Profesor(std::move(nume), std::move(grupe), salar){}
